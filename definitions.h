@@ -1,22 +1,23 @@
 #pragma once
 
-//-----CONFIG-----//
-
+//---------------------------------------------------------------
+//--CONFIG
+//---------------------------------------------------------------
 #define REMOTE_SHUTTER
 #define USB_SERIAL
 #define ENCODER
 #define LCD_16x2
-#define LCD_BACKLIGHT
+//#define LCD_BACKLIGHT
 #ifdef LCD_BACKLIGHT
     #define LCD_BACKLIGHT_ANALOG
     #define LCD_BACKLIGHT_DIGITAL
 #endif //LCD_BACKLIGHT
 #define STEPS_PER_ROTATION 200
-#define STEPS_PER_MM //STEPS_PER_ROTATION * SCREW_PITCH
+#define STEPS_PER_MM 1600 //STEPS_PER_ROTATION * SCREW_PITCH
 
-
-//-----PINS-----//
-
+//---------------------------------------------------------------
+//--PINS
+//---------------------------------------------------------------
 #ifdef  ENCODER
     #define PIN_ENCODER_A
     #define PIN_ENCODER_B
@@ -51,9 +52,9 @@
 #define PIN_STEPPER_B2
 
 
-
-//-----LIBRARIES-----//
-
+//------------------------------------------------------------------
+//--LIBRARIES
+//------------------------------------------------------------------
 #ifdef ENCODER
     #define ENCODER_LIBRARY
 #endif //ENCODER
