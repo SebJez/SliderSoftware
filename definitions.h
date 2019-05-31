@@ -29,7 +29,6 @@
 
 #ifdef LCD_16x2
     #define PIN_LCD_RS
-    #define PIN_LCD_RW
     #define PIN_LCD_E
     #define PIN_LCD_D4
     #define PIN_LCD_D5
