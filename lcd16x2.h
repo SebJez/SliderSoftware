@@ -1,3 +1,5 @@
+#ifndef lcd16x2_h
+#define lcd16x2_h
 #include "definitions.h"
 #ifdef LCD_16x2
 #include <LiquidCrystal.h>
@@ -86,4 +88,5 @@ void Display::writeBottomRight(String text)
     update();
 }
 
-#endif
+#endif //LCD_16x2
+#endif //lcd16x2_h

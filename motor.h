@@ -1,6 +1,6 @@
-#pragma once
+#ifndef motor_h
+#define motor_h
 #include "definitions.h"
-#include "customStepper.h"
 
 class Motor
 {
@@ -141,3 +141,4 @@ float Motor::getPosition()
     return (float)stepNumber/STEPS_PER_MM;
 }
 
+#endif //motor_h

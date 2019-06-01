@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef definitions_h
+#define definitions_h
 //---------------------------------------------------------------
 //--CONFIG
 //---------------------------------------------------------------
@@ -64,3 +64,5 @@
 #ifdef ENCODER
     #define ENCODER_LIBRARY
 #endif //ENCODER
+
+#endif //definitions_h
