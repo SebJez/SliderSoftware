@@ -12,8 +12,12 @@
     #define LCD_BACKLIGHT_ANALOG
     #define LCD_BACKLIGHT_DIGITAL
 #endif //LCD_BACKLIGHT
-#define STEPS_PER_ROTATION 200
-#define STEPS_PER_MM 1600 //STEPS_PER_ROTATION * SCREW_PITCH
+#define STEPS_PER_MM 1600L //STEPS_PER_ROTATION * SCREW_PITCH
+#define SOFTWARE_ENDSTOPS
+
+#ifdef SOFTWARE_ENDSTOPS
+    #define SLIDER_LENGHT 320000L //STEPS_PER_MM * max travel of the slider
+#endif //SOFTWARE_ENDSTOPS
 
 //---------------------------------------------------------------
 //--PINS
@@ -49,6 +53,10 @@
 #define PIN_STEPPER_A2
 #define PIN_STEPPER_B1
 #define PIN_STEPPER_B2
+
+#ifdef USE_STEPPER_ENABLE_PIN
+    #define PIN_STEPPER_ENABLE
+#endif //USE_STEPPER_ENABLE_PIN
 
 
 //------------------------------------------------------------------
