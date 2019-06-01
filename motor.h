@@ -4,32 +4,30 @@
 
 class Motor
 {
-    void move(long distance_in_microns);
-    void setSpeed(float speed_mm_per_second);
+    long move(long steps);
+    float move(float distance_mm);
+    float setSpeed(float speed_mm_per_second);
+    long getStep();
+    float getPosition();
 
     private:
         void makeStep(bool clockwise);
-        long stepNumber;
-        byte phase;
+        long stepNumber = 0;
+        byte phase = 0;
         bool stop_flag = false;
-        unsigned long interval;
-        unsigned long last_step_time;
+        unsigned long interval = 1000000L/STEPS_PER_MM/DEFAULT_SPEED;
+        unsigned long last_step_time = 0;
 
 };
 
-Motor::Motor()
-{
-    /*stepMotor = Stepper(STEPS_PER_ROTATION, \
-    PIN_STEPPER_A1, PIN_STEPPER_A2, PIN_STEPPER_B1,  PIN_STEPPER_B2);
-    stepMotor.setSpeed()*/
-}
 void Motor::setSpeed(float speed_mm_per_second)
 {
     interval = 1000000L / STEPS_PER_MM / speed_mm_per_second;
 }
-void Motor::move(float distance)
+
+long Motor::move(long steps)
 {
-    long steps_to_do = distance * (long)STEPS_PER_MM;
+    long steps_to_do = steps;
     
     #ifdef SOFTWARE_ENDSTOPS
         long endpos = stepNumber+steps_to_do;
@@ -124,10 +122,22 @@ void Motor::move(float distance)
             last_step_time = now;
         }
     }
+    return stepNumber;
 }
 
-void Motor::makeStep(bool direction)
+float Motor::move(float distance_mm)
 {
-
-    
+    long steps = distance_mm * STEPS_PER_MM;
+    return ((float)move(steps))/((float)STEPS_PER_MM);
 }
+
+long Motor::getStep()
+{
+    return stepNumber;
+}
+
+float Motor::getPosition()
+{
+    return (float)stepNumber/STEPS_PER_MM;
+}
+

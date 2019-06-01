@@ -6,17 +6,20 @@
 #define REMOTE_SHUTTER
 #define USB_SERIAL
 #define ENCODER
+
 #define LCD_16x2
 //#define LCD_BACKLIGHT
 #ifdef LCD_BACKLIGHT
     #define LCD_BACKLIGHT_ANALOG
     #define LCD_BACKLIGHT_DIGITAL
 #endif //LCD_BACKLIGHT
-#define STEPS_PER_MM 1600L //STEPS_PER_ROTATION * SCREW_PITCH
-#define SOFTWARE_ENDSTOPS
 
+#define STEPS_PER_MM 1600L //steps per rotation * screw pitch
+#define DEFAULT_SPEED 10L  //in mm/s
+
+#define SOFTWARE_ENDSTOPS
 #ifdef SOFTWARE_ENDSTOPS
-    #define SLIDER_LENGHT 320000L //STEPS_PER_MM * max travel of the slider
+    #define SLIDER_LENGHT_MM  200L
 #endif //SOFTWARE_ENDSTOPS
 
 //---------------------------------------------------------------
@@ -53,10 +56,6 @@
 #define PIN_STEPPER_A2
 #define PIN_STEPPER_B1
 #define PIN_STEPPER_B2
-
-#ifdef USE_STEPPER_ENABLE_PIN
-    #define PIN_STEPPER_ENABLE
-#endif //USE_STEPPER_ENABLE_PIN
 
 
 //------------------------------------------------------------------
