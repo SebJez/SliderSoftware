@@ -27,9 +27,10 @@ class Display
         void writeBottomLeft(String text);
         void writeBottomMiddle(String text);
         void writeBottomRight(String text);
+        Display();
     private:
-        String[2] currentText;
-        LiquidCrystal lcd;
+        String currentText[2];
+        LiquidCrystal lcd = LiquidCrystal(PIN_LCD_RS, PIN_LCD_E, PIN_LCD_D4 ,PIN_LCD_D5, PIN_LCD_D6, PIN_LCD_D7);
         void update();
     
     
@@ -37,8 +38,6 @@ class Display
 
 Display::Display()
 {
-    lcd = LiquidCrystal(PIN_LCD_RS, PIN_LCD_E, \
-    PIN_LCD_D4, PIN_LCD_D5, PIN_LCD_D6, PIN_LCD_D7);
     lcd.begin(16,2);
 
     currentText[0].reserve(16);

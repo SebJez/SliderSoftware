@@ -35,12 +35,12 @@
 #define PIN_ENDSTOP
 
 #ifdef LCD_16x2
-    #define PIN_LCD_RS
-    #define PIN_LCD_E
-    #define PIN_LCD_D4
-    #define PIN_LCD_D5
-    #define PIN_LCD_D6
-    #define PIN_LCD_D7
+    #define PIN_LCD_RS 1
+    #define PIN_LCD_E  2
+    #define PIN_LCD_D4 4
+    #define PIN_LCD_D5 3
+    #define PIN_LCD_D6 5
+    #define PIN_LCD_D7 6
 #endif //LCD_16x2
 
 #ifdef LCD_BACKLIGHT
