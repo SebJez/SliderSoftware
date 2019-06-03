@@ -4,6 +4,12 @@
 //--CONFIG
 //---------------------------------------------------------------
 #define REMOTE_SHUTTER
+
+#ifdef REMOTE_SHUTTER
+    #define SHUTTER_INVERT false //set to true if shutter triggers on LOW
+    #define USE_AF
+#endif //REMOTE_SHUTTER
+
 #define USB_SERIAL
 #define ENCODER
 
@@ -49,8 +55,11 @@
 
 #ifdef REMOTE_SHUTTER
     #define PIN_SHUTTER
-    #define PIN_AF
 #endif //REMOTE_SHUTTER
+
+#ifdef USE_AF
+    #define PIN_AF
+#endif
 
 #define PIN_STEPPER_A1
 #define PIN_STEPPER_A2
