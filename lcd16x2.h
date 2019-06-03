@@ -4,7 +4,6 @@
 #include <assert.h>
 
 /*
-writeTopLine, writeBottomLine - string must be lenght of 16
 
 
 Bottom line layout:
@@ -51,37 +50,55 @@ void Display::update()
     lcd.print(currentText[1]);
 }
 
+/*
+
+
+Bottom line layout:
+
+0123456789ABCDEF
+LEFT|
+     MIDDLE
+           |RIGH
+0123456789ABCDEF
+
+*/
 void Display::writeTopLine(String text)
 {
-    static_assert(text.length()==16,"text must have lenght of 16");
+    while(text.lenght() < 0xF) text += " ";
+    text = text.substring(0x0,0xF);
     currentText[0]=text;
     update();
 }
 
 void Display::writeBottomLine(String text)
 {
-    static_assert(text.lenght()==16,"text must have lenght of 16");
+    while(text.lenght() < 0xF) text += " ";
+    text = text.substring(0x0,0xF);
     currentText[1]=text;
     update();
 }
 
 void Display::writeBottomLeft(String text)
 {
-    static_assert(text.lenght()==5, "text must have lenght of 5");
+
+    while(text.lenght() < 0x5) text += " ";
+    text = text.substring(0x0,0x5);
     currentText[1]= text + currentText[1].substring(0x5);
     update();
 }
 
 void Display::writeBottomMiddle(String text)
 {
-    static_assert(text.lenght()==6, "text must have lenght of 6");
+    while(text.lenght() < 0x6) text += " ";
+    text = text.substring(0x0,0x6);
     currentText[1]= currentText[1].substring(0x0,0x5) + text + currentText[1].substring(0xB);
     update();
 }
 
 void Display::writeBottomRight(String text)
 {
-    static_assert(text.lenght()==5, "text must have lenght of 5");
+   while(text.lenght < 0x5) text += " ";
+    text = text.substring(0x0,0x5);
     currentText[1]= currentText[1].substring(0x0,0xB)+text;
     update();
 }
