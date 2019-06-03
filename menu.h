@@ -8,6 +8,7 @@ private:
 public:
     String name;
     Display* lcd;
+    Encoder* encoder;
     MenuItem* next;
     MenuItem* prev;
     MenuItem* up;
@@ -19,14 +20,7 @@ public:
     
 };
 
-class SubMenu : MenuItem
-{
-    public:
-    Element(Display* lcd, MenuItem* next, MenuItem* prev, MenuItem* up) :\
-    lcd(lcd),next(next),prev(prev),up(up) {}
-};
-
 #include "main_menu.h"// MAIN MENU
-#include "manual_control.h"// MANUAL CONTROL
+
 
 #endif menu_h

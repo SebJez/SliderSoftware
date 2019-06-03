@@ -1,12 +1,10 @@
 #ifndef main_menu_h
 #define main_menu_h
-
 class MainMenu : MenuItem
 {
 public:
 
-    MainMenu(Display* lcd):\
-      lcd(display), item(firstItem),
+    MainMenu(Display display): lcd(display)
     {   
         next = this;
         prev = this;
@@ -26,21 +24,15 @@ public:
 
     MenuItem* action_right()
     {
-       if(item->next != nullptr)
-        {
-            item = item->next;
-            show();
-        }
+        item = item->next;
+        show();
         return this;
     }
 
     MenuItem* action_left()
     {
-        if(item->next != nullptr)
-        {
-            item = item->prev;
-            show();
-        }
+        item = item->prev;
+        show();
         return this;
     }
 
