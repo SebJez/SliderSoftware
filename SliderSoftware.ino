@@ -24,6 +24,7 @@ MenuItem* currentMenu;
 
 //menus initialisation
 auto mainMenu = MainMenu(&lcd);
+auto manualControl = SubMenu(&lcd, nullptr, nullptr, &mainMenu);
 
 
 void setup()
