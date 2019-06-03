@@ -12,6 +12,9 @@ Motor stepper = Motor(PIN_STEPPER_A1, PIN_STEPPER_A2, PIN_STEPPER_B1, PIN_STEPPE
 
 Display lcd = Display(PIN_LCD_RS, PIN_LCD_E, PIN_LCD_D4, PIN_LCD_D5, PIN_LCD_D6, PIN_LCD_D7);
 
+bool interrupt_endstop_flag;
+bool interrupt_cancel_flag;
+
 #ifdef USE_AF
 Shutter shutter = Shutter(PIN_SHUTTER, PIN_AF, SHUTTER_INVERT);
 #else
