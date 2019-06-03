@@ -1,6 +1,5 @@
 #ifndef motor_h
 #define motor_h
-#include "definitions.h"
 
 class Motor
 {
@@ -9,39 +8,57 @@ class Motor
     float setSpeed(float speed_mm_per_second);
     long getStep();
     float getPosition();
+    Motor(int pinA1, int pinA2, int pinB1, int pinB2, long steps_per_mm, float speed_mm_per_second);
+    
 
     private:
         void makeStep(bool clockwise);
         long stepNumber = 0;
-        byte phase = 0;
+        byte phase = 0; //overflow intended 
         bool stop_flag = false;
-        unsigned long interval = 1000000L/STEPS_PER_MM/DEFAULT_SPEED;
+        unsigned long interval;
         unsigned long last_step_time = 0;
+        long steps_per_mm;
+        int pinA1;
+        int pinA2;
+        int pinB1;
+        int pinB2;
+        bool flip_direction;
+        bool enable_endstops;
+        long max_steps;
 
-};
+Motor::Motor(int pinA1, int pinA2, int pinB1, int pinB2, long steps_per_mm, \
+  float speed_mm_per_second, bool flip_direction = false, bool enable_endstops = false, long max_steps = LONG_MAX):\
+  pinA1(pinA1),pinA2(pinA2),pinB1(pinB1),pinB2(pin_B2), \
+  steps_per_mm(steps_per_mm),flip_direction(flip_direction),enable_endstops(enable_endstops)
+{
+    pinMode(pinA1, OUTPUT);
+    pinMode(pinA2, OUTPUT);
+    pinMode(pinB1, OUTPUT);
+    pinMode(pinB2, OUTPUT);
+    setSpeed(speed_mm_per_second);
+}
 
 void Motor::setSpeed(float speed_mm_per_second)
 {
-    interval = 1000000L / STEPS_PER_MM / speed_mm_per_second;
+    interval = 1e6 / steps_per_mm / speed_mm_per_second;
 }
 
 long Motor::move(long steps)
 {
     long steps_to_do = steps;
     
-    #ifdef SOFTWARE_ENDSTOPS
+   if(enable_endstops)
+   {
         long endpos = stepNumber+steps_to_do;
-        if (endpos >= MAX_STEPS) steps_to_do = MAX_STEPS - stepNumber;
+        if (endpos >= max_steps) steps_to_do = max_steps - stepNumber;
         else if (endpos < 0) steps_to_do = - stepNumber;
-    #endif
+   }
 
     long remaining_steps = abs(steps_to_do);
     
-    #ifdef FLIP_DIRECTION
-    bool dir =   distance>=0 ? 1 : 0;
-    #else
-    bool dir =   distance>=0 ? 0 : 1;
-    #endif
+    bool dir = (distance >= 0) ? 1 : 0;
+    if(flip_direction) dir = !dir;
 
     while(remaining_steps>0 && stop_flag == false)
     {
@@ -57,28 +74,28 @@ long Motor::move(long steps)
                 //
                 {
                 case 0:
-                    digitalWrite(PIN_STEPPER_A1, HIGH);
-                    digitalWrite(PIN_STEPPER_A2, LOW);
-                    digitalWrite(PIN_STEPPER_B1, LOW);
-                    digitalWrite(PIN_STEPPER_B2, HIGH);
+                    digitalWrite(pinA1, HIGH);
+                    digitalWrite(pinA2, LOW);
+                    digitalWrite(pinB1, LOW);
+                    digitalWrite(pinB2, HIGH);
                     break;
                 case 1:
-                    digitalWrite(PIN_STEPPER_A1, HIGH);
-                    digitalWrite(PIN_STEPPER_A2, LOW);
-                    digitalWrite(PIN_STEPPER_B1, HIGH);
-                    digitalWrite(PIN_STEPPER_B2, LOW);
+                    digitalWrite(pinA1, HIGH);
+                    digitalWrite(pinA2, LOW);
+                    digitalWrite(pinB1, HIGH);
+                    digitalWrite(pinB2, LOW);
                     break;
                 case 2:
-                    digitalWrite(PIN_STEPPER_A1, LOW);
-                    digitalWrite(PIN_STEPPER_A2, HIGH);
-                    digitalWrite(PIN_STEPPER_B1, HIGH);
-                    digitalWrite(PIN_STEPPER_B2, LOW);
+                    digitalWrite(pinA1, LOW);
+                    digitalWrite(pinA2, HIGH);
+                    digitalWrite(pinB1, HIGH);
+                    digitalWrite(pinB2, LOW);
                     break;
                 case 3:
-                    digitalWrite(PIN_STEPPER_A1, LOW);
-                    digitalWrite(PIN_STEPPER_A2, HIGH);
-                    digitalWrite(PIN_STEPPER_B1, LOW);
-                    digitalWrite(PIN_STEPPER_B2, HIGH);
+                    digitalWrite(pinA1, LOW);
+                    digitalWrite(pinA2, HIGH);
+                    digitalWrite(pinB1, LOW);
+                    digitalWrite(pinB2, HIGH);
                     break;
                 }
                 phase++;
@@ -90,28 +107,28 @@ long Motor::move(long steps)
                 switch (phase % 4)
                 {
                 case 2:
-                    digitalWrite(PIN_STEPPER_A1, HIGH);
-                    digitalWrite(PIN_STEPPER_A2, LOW);
-                    digitalWrite(PIN_STEPPER_B1, LOW);
-                    digitalWrite(PIN_STEPPER_B2, HIGH);
+                    digitalWrite(pinA1, HIGH);
+                    digitalWrite(pinA2, LOW);
+                    digitalWrite(pinB1, LOW);
+                    digitalWrite(pinB2, HIGH);
                     break;
                 case 3:
-                    digitalWrite(PIN_STEPPER_A1, HIGH);
-                    digitalWrite(PIN_STEPPER_A2, LOW);
-                    digitalWrite(PIN_STEPPER_B1, HIGH);
-                    digitalWrite(PIN_STEPPER_B2, LOW);
+                    digitalWrite(pinA1, HIGH);
+                    digitalWrite(pinA2, LOW);
+                    digitalWrite(pinB1, HIGH);
+                    digitalWrite(pinB2, LOW);
                     break;
                 case 0:
-                    digitalWrite(PIN_STEPPER_A1, LOW);
-                    digitalWrite(PIN_STEPPER_A2, HIGH);
-                    digitalWrite(PIN_STEPPER_B1, HIGH);
-                    digitalWrite(PIN_STEPPER_B2, LOW);
+                    digitalWrite(pinA1, LOW);
+                    digitalWrite(pinA2, HIGH);
+                    digitalWrite(pinB1, HIGH);
+                    digitalWrite(pinB2, LOW);
                     break;
                 case 1:
-                    digitalWrite(PIN_STEPPER_A1, LOW);
-                    digitalWrite(PIN_STEPPER_A2, HIGH);
-                    digitalWrite(PIN_STEPPER_B1, LOW);
-                    digitalWrite(PIN_STEPPER_B2, HIGH);
+                    digitalWrite(pinA1, LOW);
+                    digitalWrite(pinA2, HIGH);
+                    digitalWrite(pinB1, LOW);
+                    digitalWrite(pinB2, HIGH);
                     break;
                 }
                 phase--;
@@ -127,8 +144,8 @@ long Motor::move(long steps)
 
 float Motor::move(float distance_mm)
 {
-    long steps = distance_mm * STEPS_PER_MM;
-    return ((float)move(steps))/((float)STEPS_PER_MM);
+    long steps = distance_mm * steps_per_mm;
+    return ((float)move(steps))/((float)steps_per_mm);
 }
 
 long Motor::getStep()
@@ -138,7 +155,7 @@ long Motor::getStep()
 
 float Motor::getPosition()
 {
-    return (float)stepNumber/STEPS_PER_MM;
+    return (float)stepNumber/steps_per_mm;
 }
 
 #endif //motor_h

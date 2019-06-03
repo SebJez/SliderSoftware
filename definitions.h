@@ -15,7 +15,7 @@
 #endif //LCD_BACKLIGHT
 
 #define STEPS_PER_MM 1600L //steps per rotation * screw pitch
-#define DEFAULT_SPEED 10L  //in mm/s
+#define DEFAULT_SPEED 10.f  //in mm/s
 
 #define SOFTWARE_ENDSTOPS
 #ifdef SOFTWARE_ENDSTOPS
