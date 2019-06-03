@@ -3,6 +3,10 @@
 //---------------------------------------------------------------
 //--CONFIG
 //---------------------------------------------------------------
+
+#include "language_en.h"
+//#include "language_pl.h"
+
 #define REMOTE_SHUTTER
 
 #ifdef REMOTE_SHUTTER

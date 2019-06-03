@@ -32,7 +32,7 @@ public:
         next = this;
         prev = this;
         up = this;
-        name = "MENU"
+        name = T_MAIN_MENU;
     }
 
     MenuItem* item = nullptr; //pointer to first item 
