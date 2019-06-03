@@ -1,7 +1,5 @@
 #ifndef lcd16x2_h
 #define lcd16x2_h
-#include "definitions.h"
-#ifdef LCD_16x2
 #include <LiquidCrystal.h>
 #include <assert.h>
 
@@ -27,17 +25,18 @@ class Display
         void writeBottomLeft(String text);
         void writeBottomMiddle(String text);
         void writeBottomRight(String text);
-        Display();
+        Display(int pin_E, int pin_RS, int pin_D4, int pin_D5, int pin_D6, int pin_D7);
     private:
         String currentText[2];
-        LiquidCrystal lcd = LiquidCrystal(PIN_LCD_RS, PIN_LCD_E, PIN_LCD_D4 ,PIN_LCD_D5, PIN_LCD_D6, PIN_LCD_D7);
+        LiquidCrystal lcd;
         void update();
     
     
 };
 
-Display::Display()
+Display::Display(int pin_RS, int pin_E, int pin_D4, int pin_D5, int pin_D6, int pin_D7):
 {
+    lcd = LiquidCrystal(pin_RS,pin_E,pin_D4,pin_D5,pin_D6,pin_D7);
     lcd.begin(16,2);
 
     currentText[0].reserve(16);
@@ -87,5 +86,5 @@ void Display::writeBottomRight(String text)
     update();
 }
 
-#endif //LCD_16x2
 #endif //lcd16x2_h
+
