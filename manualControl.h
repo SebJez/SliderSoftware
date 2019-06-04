@@ -34,14 +34,14 @@ namespace manualControl
 
     //0123456789ABCDEF
     //      000.00 mm
-    void Step()
+    void step()
     {
-        current_step_index = 
+        current_step_index = motor_step_index;
         while(!exit_flag)
         {
-        lcd->writeTopLine(T_MANUAL_CONTROL_SET_STEP);
-        lcd->writeBottomLine("      "+String(steps[current_step_index]/STEPS_PER_MM,2)+" mm");
-        readKnob(&encoder, PIN_ENCODER_PRESS, PIN_CANCEL, &stepUp, &stepDown, &stepOK, &stepCancel);
+            lcd->writeTopLine(T_MANUAL_CONTROL_SET_STEP);
+            lcd->writeBottomLine("      "+String(steps[current_step_index]/STEPS_PER_MM,2)+" mm");
+            readKnob(&encoder, PIN_ENCODER_PRESS, PIN_CANCEL, &stepUp, &stepDown, &stepOK, &stepCancel);
         }
         exit_flag = false;
 
@@ -51,7 +51,10 @@ namespace manualControl
     // -- MOVE -- //
     
     long steps_to_move = 0
-    long position = 
+    long position = stepper.getStep();
+
+    //TODO --- manual motion code
+    
 
 
     // -- SUBMENU -- //
