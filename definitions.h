@@ -3,7 +3,11 @@
 //---------------------------------------------------------------
 //--CONFIG
 //---------------------------------------------------------------
-#define REMOTE_SHUTTER
+
+//LANGUAGE:
+
+#include "language_en.h"    //ENGLISH
+//#include "language_pl.h"  //POLISH
 
 #ifdef REMOTE_SHUTTER
     #define SHUTTER_INVERT false //set to true if shutter triggers on LOW
@@ -11,7 +15,6 @@
 #endif //REMOTE_SHUTTER
 
 #define USB_SERIAL
-#define ENCODER
 
 #define LCD_16x2
 //#define LCD_BACKLIGHT
@@ -31,12 +34,9 @@
 //---------------------------------------------------------------
 //--PINS
 //---------------------------------------------------------------
-#ifdef  ENCODER
-    #define PIN_ENCODER_A
-    #define PIN_ENCODER_B
-    #define PIN_ENCODER_PRESS
-#endif //ENCODER
-
+#define PIN_ENCODER_A
+#define PIN_ENCODER_B
+#define PIN_ENCODER_PRESS
 #define PIN_CANCEL
 #define PIN_ENDSTOP
 
@@ -68,10 +68,4 @@
 
 
 //------------------------------------------------------------------
-//--LIBRARIES
-//------------------------------------------------------------------
-#ifdef ENCODER
-    #define ENCODER_LIBRARY
-#endif //ENCODER
-
-#endif //definitions_h
+//--LIBRARIES AND INCLUDES
