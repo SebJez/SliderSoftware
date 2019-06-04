@@ -37,7 +37,7 @@ class Menu
     }
 };
 
-void Menu::menuUp();
+void Menu::menuUp()
 {
     if(current_item < menuLenght - 1)
     {

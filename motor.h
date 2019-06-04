@@ -28,6 +28,7 @@ class Motor
         bool flip_direction;
         long max_steps;
 
+};
 
 Motor::Motor(int pinA1, int pinA2, int pinB1, int pinB2, int pinEndstop, int pinCancel, long steps_per_mm, \
   float speed_mm_per_second, bool flip_direction = false, long max_steps = LONG_MAX):\
@@ -48,7 +49,7 @@ void Motor::setSpeed(float speed_mm_per_second)
     interval = 1e6 / steps_per_mm / speed_mm_per_second;
 }
 
-long Motor::move(long steps, bool enable_endstops = true;)
+long Motor::move(long steps, bool enable_endstops = true)
 {
     attachInterrupt(digitalPinToInterrupt(pinEndstop),interruptEndstop, FALLING);
     attachInterrupt(digitalPinToInterrupt(pinCancel),interruptCancel, FALLING);

@@ -23,12 +23,13 @@
     #define LCD_BACKLIGHT_DIGITAL
 #endif //LCD_BACKLIGHT
 
-#define STEPS_PER_MM 1600L //steps per rotation * screw pitch
+#define STEPS_PER_MM 25.f // screw pitch / steps per rotation
+#define MANUAL_STEPS {1,5,25,125,1250}
 #define DEFAULT_SPEED 10.f  //in mm/s
 
 #define SOFTWARE_ENDSTOPS
 #ifdef SOFTWARE_ENDSTOPS
-    #define SLIDER_LENGHT_MM  200L
+    #define SLIDER_LENGHT_MM  200f
 #endif //SOFTWARE_ENDSTOPS
 
 //---------------------------------------------------------------

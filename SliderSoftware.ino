@@ -31,7 +31,7 @@ MenuItem[] subprograms = \
   MenuItem(T_SETUP_MENU, &setupMenu()),
 ]
 
-Menu mainMenu = Menu(&lcd, &encoder, PIN_ENCODER_PRESS, PIN_CANCEL, subprograms)
+Menu mainMenu = Menu(&lcd, &encoder, PIN_ENCODER_PRESS, PIN_CANCEL, &subprograms)
 
 
 void loop()
