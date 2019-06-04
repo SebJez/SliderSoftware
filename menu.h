@@ -5,7 +5,7 @@
 #include <Encoder.h>
 #include "readKnob.h"
 
-typedef struct s_menuItem {String name, byte(*subprogram)()} MenuItem;
+typedef struct s_menuItem {String name, void(*subprogram)()} MenuItem;
 
 class Menu
 {

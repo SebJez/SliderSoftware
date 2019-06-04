@@ -26,7 +26,7 @@ pinMode(PIN_CANCEL, INPUT_PULLUP);
 // -- MAIN MENU -- //
 MenuItem[] subprograms = \
 [
-  MenuItem(T_MANUAL_CONTROL, &manualControl()),
+  MenuItem(T_MANUAL_CONTROL, &manualControl::main()),
   MenuItem(T_HOME, &home()),
   MenuItem(T_SETUP_MENU, &setupMenu()),
 ]

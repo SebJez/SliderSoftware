@@ -15,12 +15,12 @@ namespace manualControl
     void stepUp()
     {
         if(current_step_index + 1 < sizeofSteps)
-        current_step_index++;
+            current_step_index++;
     }
     void stepDown()
     {
         if(current_step_index >0)
-        current_step_index--;
+            current_step_index--;
     }
     void stepOK()
     {
@@ -51,10 +51,48 @@ namespace manualControl
     // -- MOVE -- //
     
     long steps_to_move = 0
-    long position = stepper.getStep();
 
-    //TODO --- manual motion code
-    
+    void moveUp()
+    {
+        if(steps_to_move + position + 1 < MAX_STEPS)
+            steps_to_move++;
+    }
+
+    void moveDown()
+    {
+        if(steps_to_move + position - 1 >= 0)
+            steps_to_move--;
+
+    }
+
+    void moveOK()
+    {
+        stepper.move(steps_to_move);
+    }
+
+    void moveCancel()
+    {
+        exit_flag = true;
+    }
+
+    void move()
+    {
+        long position = stepper.getStep();
+        float position_mm = stepper.getStep()/STEPS_PER_MM;
+
+        while (!exit_flag)
+        {
+            lcd->writeTopLine(T_MANUAL_POSITION+" "+String(position_mm,2)+"mm");
+            
+            float steps_to_move_mm = steps_to_move / STEPS_PER_MM;
+            lcd->writeBottomLine(String(steps_to_move_mm,2)+"mm    "+\
+              String(position_mm+steps_to_move_mm,2)+"mm");
+
+            readKnob(&encoder, PIN_ENCODER_PRESS, PIN_CANCEL, \
+              &moveUp, &moveDown, &moveOK, &moveCancel);
+        }
+        exit_flag = false;
+    }
 
 
     // -- SUBMENU -- //
