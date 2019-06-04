@@ -24,7 +24,6 @@ pinMode(PIN_CANCEL, INPUT_PULLUP);
 #include "setup.h"
 
 // -- MAIN MENU -- //
-
 MenuItem[] subprograms = \
 [
   MenuItem(T_MANUAL_CONTROL, &manualControl()),
