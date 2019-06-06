@@ -20,15 +20,15 @@ pinMode(PIN_CANCEL, INPUT_PULLUP);
 
 // -- INCLUDE SUBPROGRAMS HERE-- //
 #include "manualControl.h"
-#include "home.h"
-#include "setup.h"
+//#include "home.h"
+//#include "setup.h"
 
 // -- MAIN MENU -- //
 MenuItem[] subprograms = \
 [
   MenuItem(T_MANUAL_CONTROL, &manualControl::main()),
-  MenuItem(T_HOME, &home()),
-  MenuItem(T_SETUP_MENU, &setupMenu()),
+  //MenuItem(T_HOME, &home()),
+  //MenuItem(T_SETUP_MENU, &setupMenu()),
 ]
 
 Menu mainMenu = Menu(&lcd, &encoder, PIN_ENCODER_PRESS, PIN_CANCEL, &subprograms)

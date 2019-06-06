@@ -1,11 +1,8 @@
 #ifndef lcd16x2_h
 #define lcd16x2_h
 #include <LiquidCrystal.h>
-#include <assert.h>
 
 /*
-
-
 Bottom line layout:
 
 0123456789ABCDEF
