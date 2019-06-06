@@ -11,11 +11,10 @@
 
 #ifdef REMOTE_SHUTTER
     #define SHUTTER_INVERT false //set to true if shutter triggers on LOW
-    #define USE_AF
 #endif //REMOTE_SHUTTER
 
 #define USB_SERIAL
-
+#define REMOTE_SHUTTER
 #define LCD_16x2
 //#define LCD_BACKLIGHT
 #ifdef LCD_BACKLIGHT
@@ -35,19 +34,19 @@
 //---------------------------------------------------------------
 //--PINS
 //---------------------------------------------------------------
-#define PIN_ENCODER_A
-#define PIN_ENCODER_B
-#define PIN_ENCODER_PRESS
-#define PIN_CANCEL
-#define PIN_ENDSTOP
+#define PIN_ENCODER_A 6
+#define PIN_ENCODER_B 5
+#define PIN_ENCODER_PRESS 4
+#define PIN_CANCEL 3
+#define PIN_ENDSTOP 2
 
 #ifdef LCD_16x2
-    #define PIN_LCD_RS 1
-    #define PIN_LCD_E  2
-    #define PIN_LCD_D4 4
-    #define PIN_LCD_D5 3
-    #define PIN_LCD_D6 5
-    #define PIN_LCD_D7 6
+    #define PIN_LCD_RS 7
+    #define PIN_LCD_E  8
+    #define PIN_LCD_D4 9
+    #define PIN_LCD_D5 10
+    #define PIN_LCD_D6 11
+    #define PIN_LCD_D7 12
 #endif //LCD_16x2
 
 #ifdef LCD_BACKLIGHT
@@ -55,18 +54,11 @@
 #endif //PIN_LCD_BACKLIGHT
 
 #ifdef REMOTE_SHUTTER
-    #define PIN_SHUTTER
+    #define PIN_SHUTTER A1
+    #define PIN_AF  A0
 #endif //REMOTE_SHUTTER
 
-#ifdef USE_AF
-    #define PIN_AF
-#endif
-
-#define PIN_STEPPER_A1
-#define PIN_STEPPER_A2
-#define PIN_STEPPER_B1
-#define PIN_STEPPER_B2
-
-
-//------------------------------------------------------------------
-//--LIBRARIES AND INCLUDES
+#define PIN_STEPPER_A1 A3
+#define PIN_STEPPER_A2 A2
+#define PIN_STEPPER_B1 A5
+#define PIN_STEPPER_B2 A4
