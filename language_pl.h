@@ -1,0 +1,8 @@
+//                              "0123456789ABCDEF"
+#define T_MANUAL_CONTROL        "Ster. reczne"
+    #define T_MANUAL_POSITION   "Pozycja"
+    #define T_MANUAL_SET_STEP   "Krok"
+    #define T_MANUAL_MOVE       "Sterowanie"
+    #define T_MANUAL_STEP       "Ustaw. kroku"
+#define T_HOME                  "Zerowanie"
+#define T_SETUP_MENU            "Ster. auto"

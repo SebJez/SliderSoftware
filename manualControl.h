@@ -39,7 +39,7 @@ namespace manualControl
         current_step_index = motor_step_index;
         while(!exit_flag)
         {
-            lcd->writeTopLine(T_MANUAL_CONTROL_SET_STEP);
+            lcd->writeTopLine(T_MANUAL_SET_STEP);
             lcd->writeBottomLine("      "+String(steps[current_step_index]/STEPS_PER_MM,2)+" mm");
             readKnob(&encoder, PIN_ENCODER_PRESS, PIN_CANCEL, &stepUp, &stepDown, &stepOK, &stepCancel);
         }
@@ -100,8 +100,8 @@ namespace manualControl
 
     MenuItem* submenu_items = \
     [
-        MenuItem(T_MANUAL_CONTROL_MOVE, &move),
-        MenuItem(T_MANUAL_CONTROL_STEP, &step)
+        MenuItem(T_MANUAL_MOVE, &move),
+        MenuItem(T_MANUAL_STEP, &step)
     ];
 
     Menu submenu = Menu(&lcd, &encoder, PIN_ENCODER_PRESS, PIN_CANCEL, submenu_items);

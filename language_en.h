@@ -1,0 +1,8 @@
+//                              "0123456789ABCDEF"
+#define T_MANUAL_CONTROL        "Manual control"
+    #define T_MANUAL_POSITION   "Position"
+    #define T_MANUAL_SET_STEP   "Step"
+    #define T_MANUAL_MOVE       "Move"
+    #define T_MANUAL_STEP       "Set step"
+#define T_HOME                  "Home slider"
+#define T_SETUP_MENU            "Auto shooting"
