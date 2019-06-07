@@ -5,7 +5,7 @@
 #include <Encoder.h>
 #include "readKnob.h"
 
-typedef struct s_menuItem {String name, void(*subprogram)()} MenuItem;
+typedef struct s_menuItem {String subprogram_name; void(*subprogram)();} MenuItem;
 
 class Menu
 {
@@ -16,13 +16,9 @@ class Menu
         Display* lcd;
         int pinOK;
         int pinCancel;
-        MenuItem[] items;
+        MenuItem* items;
         unsigned int menuLenght;
         bool exitFlag = false;
-        void menuUp();
-        void menuDown();
-        void menuOK();
-        void menuCancel();
         void run(unsigned int start_from_item=0);
 
     public:
@@ -42,10 +38,10 @@ void Menu::menuUp()
     if(current_item < menuLenght - 1)
     {
         current_item++;
-        lcd.writeTopLine(">"+items[current_item].name);
+        lcd->writeTopLine(">"+items[current_item].subprogram_name);
 
       if(current_item < menuLenght - 1)
-        lcd.writeBottomLine(" "+items[current_item+1].name);
+        lcd->writeBottomLine(" "+items[current_item+1].subprogram_name);
       else
         lcd.writeBottomLine(" ");  
     }
@@ -56,12 +52,12 @@ void Menu::menuDown()
     if(current_item > 0)
     {
       current_item--;
-      lcd.writeTopLine(">"+items[current_item].name);
+      lcd->writeTopLine(">"+items[current_item].subprogram_name);
 
       if(current_item < menuLenght - 1)
-        lcd.writeBottomLine(" "+items[current_item+1].name);
+        lcd->writeBottomLine(" "+items[current_item+1].subprogram_name);
       else
-        lcd.writeBottomLine(" ");
+        lcd->writeBottomLine(" ");
 
     }
 }
@@ -80,12 +76,12 @@ void Menu::run(unsigned int start_from_item)
 {
     current_item = start_from_item;
 
-    lcd.writeTopLine(">"+items[current_item].name);
+    lcd->writeTopLine(">"+items[current_item].subprogram_name);
 
     if(current_item < menuLenght - 1)
-        lcd.writeBottomLine(" "+items[current_item+1].name);
+        lcd->writeBottomLine(" "+items[current_item+1].subprogram_name);
     else
-        lcd.writeBottomLine(" ");
+        lcd->writeBottomLine(" ");
     
     while(!exitFlag)
         readKnob(knob, pinOK, pinCancel, &menuUp, &menuDown, &menuOK, &menuCancel);

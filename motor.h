@@ -8,6 +8,7 @@ volatile bool endstopFlag = false;
     //improvement - use namespace for flags
 class Motor
 {
+  public:
     long move(long steps, bool enable_endstops = true);
     float move(float distance_mm, bool enable_endstops = true);
     void setSpeed(float speed_mm_per_second);

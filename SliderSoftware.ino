@@ -3,9 +3,10 @@
 #include "motor.h"
 #include <Encoder.h>
 #include "readKnob.h"
+#include "shutter.h"
 
 Motor stepper = Motor(PIN_STEPPER_A1, PIN_STEPPER_A2, PIN_STEPPER_B1, PIN_STEPPER_B2,\
-  PIN_ENDSTOP, PIN_CANCEL, STEPS_PER_MM, DEFAULT_SPEED, FLIP_DIRECTION, ENABLE_ENDSTOPS, MAX_STEPS);
+  PIN_ENDSTOP, PIN_CANCEL, STEPS_PER_MM, DEFAULT_SPEED, FLIP_DIRECTION);
 
 Display lcd = Display(PIN_LCD_RS, PIN_LCD_E, PIN_LCD_D4, PIN_LCD_D5, PIN_LCD_D6, PIN_LCD_D7);
 
@@ -24,12 +25,12 @@ pinMode(PIN_CANCEL, INPUT_PULLUP);
 //#include "setup.h"
 
 // -- MAIN MENU -- //
-MenuItem[] subprograms = \
-[
+MenuItem subprograms[] = \
+{
   MenuItem(T_MANUAL_CONTROL, &manualControl::main()),
   //MenuItem(T_HOME, &home()),
   //MenuItem(T_SETUP_MENU, &setupMenu()),
-]
+}
 
 Menu mainMenu = Menu(&lcd, &encoder, PIN_ENCODER_PRESS, PIN_CANCEL, &subprograms)
 
@@ -38,5 +39,3 @@ void loop()
 {
   mainMenu.run();
 }
-
-

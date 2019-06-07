@@ -1,10 +1,10 @@
 #ifndef readKnob_h
 #define readKnob_h
 
-void readKnob(Encoder* knob, int pinOK, int pinCancel, function action_up, \
-  function action_down, function action_press, function action_cancel)
+void readKnob(Encoder* knob, int pinOK, int pinCancel, void(*action_up)(), \
+  void(*action_down)(), void(*action_press)(), void(*action_cancel)())
 {
-    byte knobPosition = knob.readKnob()/4;
+    byte knobPosition = knob->read()/4;
     while (knobPosition > 0)
     {
         action_up();
@@ -15,7 +15,7 @@ void readKnob(Encoder* knob, int pinOK, int pinCancel, function action_up, \
         action_down();
         knobPosition++;
     }
-    knob.write(0);
+    knob->write(0);
     if(digitalRead(pinOK)==LOW) action_press();
     if(digitalRead(pinCancel)==LOW) action_cancel();
 

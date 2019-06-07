@@ -9,9 +9,6 @@
 #include "language_en.h"    //ENGLISH
 //#include "language_pl.h"  //POLISH
 
-#ifdef REMOTE_SHUTTER
-    #define SHUTTER_INVERT false //set to true if shutter triggers on LOW
-#endif //REMOTE_SHUTTER
 
 #define USB_SERIAL
 #define REMOTE_SHUTTER
@@ -25,11 +22,15 @@
 #define STEPS_PER_MM 25.f // screw pitch / steps per rotation
 #define MANUAL_STEPS {1,5,25,125,1250}
 #define DEFAULT_SPEED 10.f  //in mm/s
+#define FLIP_DIRECTION false  //stepper direction
 
 #define SOFTWARE_ENDSTOPS
 #ifdef SOFTWARE_ENDSTOPS
     #define SLIDER_LENGHT_MM  200f
 #endif //SOFTWARE_ENDSTOPS
+
+#define SHUTTER_INVERT false //set to true if shutter triggers on LOW
+
 
 //---------------------------------------------------------------
 //--PINS

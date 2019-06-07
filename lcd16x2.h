@@ -70,7 +70,7 @@ String Display::getTopLine()
 
 String Display::getBottomLine()
 {
-    return currentTexe[1];
+    return currentText[1];
 }
 
 #endif //lcd16x2_h
