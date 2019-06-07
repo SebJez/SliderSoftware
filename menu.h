@@ -7,7 +7,7 @@
 
 typedef struct s_menuItem {String subprogram_name; void(*subprogram)();} MenuItem;
 
-class Menu
+class Menu 
 {
     public:
         unsigned int current_item = 0;
@@ -20,6 +20,11 @@ class Menu
         unsigned int menuLenght;
         bool exitFlag = false;
         void run(unsigned int start_from_item=0);
+        public:
+        void menuUp();
+        void menuDown();
+        void menuOK();
+        void menuCancel();
 
     public:
 
@@ -43,7 +48,7 @@ void Menu::menuUp()
       if(current_item < menuLenght - 1)
         lcd->writeBottomLine(" "+items[current_item+1].subprogram_name);
       else
-        lcd.writeBottomLine(" ");  
+        lcd->writeBottomLine(" ");  
     }
 }
 
@@ -84,7 +89,7 @@ void Menu::run(unsigned int start_from_item)
         lcd->writeBottomLine(" ");
     
     while(!exitFlag)
-        readKnob(knob, pinOK, pinCancel, &menuUp, &menuDown, &menuOK, &menuCancel);
+        readKnob(knob, pinOK, pinCancel, menuUp, &menuDown, &menuOK, &menuCancel);
 }
 
 #endif //menu_h
