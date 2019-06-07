@@ -1,8 +1,8 @@
 #include "definitions.h"
 #include "lcd16x2.h"
 #include "motor.h"
-#include "readKnob.h"
 #include <Encoder.h>
+#include "readKnob.h"
 
 Motor stepper = Motor(PIN_STEPPER_A1, PIN_STEPPER_A2, PIN_STEPPER_B1, PIN_STEPPER_B2,\
   PIN_ENDSTOP, PIN_CANCEL, STEPS_PER_MM, DEFAULT_SPEED, FLIP_DIRECTION, ENABLE_ENDSTOPS, MAX_STEPS);

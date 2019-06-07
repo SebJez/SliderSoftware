@@ -1,18 +1,22 @@
 #ifndef motor_h
 #define motor_h
 
+#include <limits.h>
+
 volatile bool motorStopFlag = false;
 volatile bool endstopFlag = false;
+    //improvement - use namespace for flags
 class Motor
 {
     long move(long steps, bool enable_endstops = true);
-    float move(float distance_mm, enable_endstops = true);
-    float setSpeed(float speed_mm_per_second);
+    float move(float distance_mm, bool enable_endstops = true);
+    void setSpeed(float speed_mm_per_second);
     long getStep();
     float getPosition();
     Motor(int pinA1, int pinA2, int pinB1, int pinB2, int pinEndstop, int pinCancel, long steps_per_mm,\
      float speed_mm_per_second, bool flip_direction = false, long max_steps = LONG_MAX);
     long autoHome();
+    long fullHome();
 
     private:
         void makeStep(bool clockwise);
@@ -25,6 +29,9 @@ class Motor
         int pinA2;
         int pinB1;
         int pinB2;
+        int pinEndstop;
+        int pinCancel;
+        bool enable_endstops;
         bool flip_direction;
         long max_steps;
 
@@ -32,7 +39,7 @@ class Motor
 
 Motor::Motor(int pinA1, int pinA2, int pinB1, int pinB2, int pinEndstop, int pinCancel, long steps_per_mm, \
   float speed_mm_per_second, bool flip_direction = false, long max_steps = LONG_MAX):\
-  pinA1(pinA1),pinA2(pinA2),pinB1(pinB1),pinB2(pin_B2),pinEndstop(),pinCancel(), \
+  pinA1(pinA1),pinA2(pinA2),pinB1(pinB1),pinB2(pinB2),pinEndstop(pinEndstop),pinCancel(pinCancel), \
   steps_per_mm(steps_per_mm),flip_direction(flip_direction),enable_endstops(enable_endstops)
 {
     pinMode(pinA1, OUTPUT);
@@ -47,6 +54,16 @@ Motor::Motor(int pinA1, int pinA2, int pinB1, int pinB2, int pinEndstop, int pin
 void Motor::setSpeed(float speed_mm_per_second)
 {
     interval = 1e6 / steps_per_mm / speed_mm_per_second;
+}
+void interruptEndstop()
+{
+    motorStopFlag = true;
+    endstopFlag = true;
+}
+
+void interruptCancel()
+{
+    motorStopFlag = true;
 }
 
 long Motor::move(long steps, bool enable_endstops = true)
@@ -64,7 +81,7 @@ long Motor::move(long steps, bool enable_endstops = true)
 
     long remaining_steps = abs(steps_to_do);
     
-    bool dir = (distance >= 0) ? 1 : 0;
+    bool dir = (steps >= 0) ? 1 : 0;
     if(flip_direction) dir = !dir;
 
     while(remaining_steps>0 && motorStopFlag == false)
@@ -168,16 +185,6 @@ float Motor::getPosition()
     return (float)stepNumber/steps_per_mm;
 }
 
-void interruptEndstop()
-{
-    motorStopFlag = true;
-    endstopFlag = true;
-}
-
-void interruptCancel()
-{
-    motorStopFlag = true;
-}
 
 long Motor::autoHome()
 {
@@ -193,12 +200,12 @@ long Motor::autoHome()
 long Motor::fullHome()
 {
     autoHome();
-    move(LONG_MAX,false)
+    move(LONG_MAX,false);
     if (endstopFlag)
     {
         max_steps = stepNumber;
         endstopFlag = false;
     }
-    return stepNumber();
+    return stepNumber;
 }
 #endif //motor_h
