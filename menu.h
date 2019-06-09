@@ -89,7 +89,22 @@ void Menu::run(unsigned int start_from_item)
         lcd->writeBottomLine(" ");
     
     while(!exitFlag)
-        readKnob(knob, pinOK, pinCancel, menuUp, &menuDown, &menuOK, &menuCancel);
+    {
+        int knobPosition = knob->read()/4;
+        while (knobPosition > 0)
+        {
+            menuUp();
+            knobPosition--;
+        }
+        while (knobPosition < 0)
+        {
+            menuDown();
+            knobPosition++;
+        }
+        knob->write(0);
+        if(digitalRead(pinOK)==LOW) menuOK();
+        if(digitalRead(pinCancel)==LOW) menuCancel();
+    }
 }
 
 #endif //menu_h
