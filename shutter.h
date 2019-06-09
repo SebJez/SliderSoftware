@@ -15,7 +15,7 @@ public:
     Shutter(int pin_shutter, bool invert = false);
     void af(unsigned long af_time_ms = 100);
     void shutter(unsigned long shutter_time_ms = 100);
-    void afShutter(unsigned long af_time_ms = 100, shutter_time_ms = 100);
+    void afShutter(unsigned long af_time_ms = 100, unsigned long shutter_time_ms = 100);
     
 };
 
