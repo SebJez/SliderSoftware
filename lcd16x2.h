@@ -51,7 +51,7 @@ void Display::update()
 {
     lcd->clear();
     lcd->print(currentText[0]);
-    lcd->setCursor(1,0);
+    lcd->setCursor(0,1);
     lcd->print(currentText[1]);
 }
 
