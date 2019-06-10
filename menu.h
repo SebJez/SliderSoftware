@@ -15,14 +15,14 @@ private:
     Display* display;
 public:
     Menu(String* items, uint8_t pinOK, uint8_t pinCancel, Encoder* encoder, Display* display):\
-     items(items), pinOK(pinOK), pinCancel(pinCancel), encoder(encoder);
+     items(items), pinOK(pinOK), pinCancel(pinCancel), encoder(encoder), display(display);
 
     byte run();
     
 };
 
 Menu::Menu(String* items, uint8_t pinOK, uint8_t pinCancel, Encoder* encoder, Display* display ):\
-     items(items), pinOK(pinOK), pinCancel(pinCancel), encoder(encoder)
+     items(items), pinOK(pinOK), pinCancel(pinCancel), encoder(encoder), display(display)
 {
     pinMode(pinCancel, INPUT_PULLUP);
     pinMode(pinOK, INPUT_PULLUP);

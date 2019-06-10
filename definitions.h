@@ -25,10 +25,15 @@
 
 #define STEPS_PER_MM 1600L //steps per rotation * screw pitch
 #define DEFAULT_SPEED 10.f  //in mm/s
-
+#define MAX_STEPS 320000L
+#define FLIP_DIRECTION false
 #define SOFTWARE_ENDSTOPS
+
 #ifdef SOFTWARE_ENDSTOPS
     #define SLIDER_LENGHT_MM  200L
+    #define ENABLE_ENDSTOPS true
+#else
+    #define ENABLE_ENDSTOPS false
 #endif //SOFTWARE_ENDSTOPS
 
 //---------------------------------------------------------------
@@ -62,3 +67,5 @@
 #define PIN_STEPPER_A2 A2
 #define PIN_STEPPER_B1 A5
 #define PIN_STEPPER_B2 A4
+
+#endif
