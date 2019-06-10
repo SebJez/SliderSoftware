@@ -1,6 +1,6 @@
 #include "definitions.h"
 #include "lcd16x2.h"
-#include "motor.h"
+//#include "motor.h"
 #include <Encoder.h>
 #include "menu.h"
 
@@ -13,18 +13,18 @@
 #endif
 
 #ifdef REMOTE_SHUTTER
-    #include "shutter.h"
+    //#include "shutter.h"
 #endif //REMOTE_SHUTTER
 
 
-Motor stepper = Motor(PIN_STEPPER_A1, PIN_STEPPER_A2, PIN_STEPPER_B1, PIN_STEPPER_B2,\
-  PIN_ENDSTOP, PIN_CANCEL, STEPS_PER_MM, DEFAULT_SPEED, FLIP_DIRECTION, ENABLE_ENDSTOPS, MAX_STEPS);
+//Motor stepper = Motor(PIN_STEPPER_A1, PIN_STEPPER_A2, PIN_STEPPER_B1, PIN_STEPPER_B2,\
+//  PIN_ENDSTOP, PIN_CANCEL, STEPS_PER_MM, DEFAULT_SPEED, FLIP_DIRECTION, ENABLE_ENDSTOPS, MAX_STEPS);
 
 Display lcd = Display(PIN_LCD_RS, PIN_LCD_E, PIN_LCD_D4, PIN_LCD_D5, PIN_LCD_D6, PIN_LCD_D7);
 
 Encoder encoder = Encoder(PIN_ENCODER_A,PIN_ENCODER_B);
 
-Shutter shutter = Shutter(PIN_SHUTTER, SHUTTER_INVERT);
+//Shutter shutter = Shutter(PIN_SHUTTER, SHUTTER_INVERT);
 
 String mainMenuItems[] = {T_MANUAL_CONTROL, T_HOME, T_PREPARE_SHOOT};
 
@@ -32,12 +32,14 @@ Menu mainMenu = Menu(mainMenuItems, PIN_ENCODER_PRESS, PIN_CANCEL, &encoder, &lc
 
 void setup()
 {
-
+  Serial.begin(9600);
 }
 
 void loop()
 {
-    byte program = mainMenu.run();
+  Serial.println(mainMenu.run());
+  delay(200);
+    /*byte program = mainMenu.run();
     switch (program)
     {
     case 0x00:
@@ -55,5 +57,5 @@ void loop()
     case 0xFF:
       //EXIT
       break;
-    }
+    }*/
 }

@@ -39,8 +39,8 @@
 //---------------------------------------------------------------
 //--PINS
 //---------------------------------------------------------------
-#define PIN_ENCODER_A 6
-#define PIN_ENCODER_B 5
+#define PIN_ENCODER_A 5
+#define PIN_ENCODER_B 6
 #define PIN_ENCODER_PRESS 4
 #define PIN_CANCEL 3
 #define PIN_ENDSTOP 2
