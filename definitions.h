@@ -3,6 +3,11 @@
 //---------------------------------------------------------------
 //--CONFIG
 //---------------------------------------------------------------
+
+#define LANGUAGE_EN
+//#define LANGUAGE_PL
+
+
 #define REMOTE_SHUTTER
 
 #ifdef REMOTE_SHUTTER
@@ -10,12 +15,7 @@
 #endif //REMOTE_SHUTTER
 
 #define USB_SERIAL
-<<<<<<< HEAD
-#define ENCODER
-
-=======
 #define REMOTE_SHUTTER
->>>>>>> a34a8ee... added pins
 #define LCD_16x2
 //#define LCD_BACKLIGHT
 #ifdef LCD_BACKLIGHT
@@ -34,22 +34,11 @@
 //---------------------------------------------------------------
 //--PINS
 //---------------------------------------------------------------
-<<<<<<< HEAD
-#ifdef  ENCODER
-    #define PIN_ENCODER_A
-    #define PIN_ENCODER_B
-    #define PIN_ENCODER_PRESS
-#endif //ENCODER
-
-#define PIN_CANCEL
-#define PIN_ENDSTOP
-=======
 #define PIN_ENCODER_A 6
 #define PIN_ENCODER_B 5
 #define PIN_ENCODER_PRESS 4
 #define PIN_CANCEL 3
 #define PIN_ENDSTOP 2
->>>>>>> a34a8ee... added pins
 
 #ifdef LCD_16x2
     #define PIN_LCD_RS 7
@@ -69,28 +58,7 @@
     #define PIN_AF  A0
 #endif //REMOTE_SHUTTER
 
-<<<<<<< HEAD
-#ifdef USE_AF
-    #define PIN_AF
-#endif
-
-#define PIN_STEPPER_A1
-#define PIN_STEPPER_A2
-#define PIN_STEPPER_B1
-#define PIN_STEPPER_B2
-
-
-//------------------------------------------------------------------
-//--LIBRARIES
-//------------------------------------------------------------------
-#ifdef ENCODER
-    #define ENCODER_LIBRARY
-#endif //ENCODER
-
-#endif //definitions_h
-=======
 #define PIN_STEPPER_A1 A3
 #define PIN_STEPPER_A2 A2
 #define PIN_STEPPER_B1 A5
 #define PIN_STEPPER_B2 A4
->>>>>>> a34a8ee... added pins

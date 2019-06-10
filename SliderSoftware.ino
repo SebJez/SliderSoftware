@@ -1,6 +1,16 @@
 #include "definitions.h"
 #include "lcd16x2.h"
 #include "motor.h"
+#include <Encoder.h>
+#include "menu.h"
+
+#ifdef LANGUAGE_EN
+  #include "language_en.h"
+#endif
+
+#ifdef LANGUAGE_PL
+  #include "language_pl.h"
+#endif
 
 #ifdef REMOTE_SHUTTER
     #include "shutter.h"
@@ -12,13 +22,13 @@ Motor stepper = Motor(PIN_STEPPER_A1, PIN_STEPPER_A2, PIN_STEPPER_B1, PIN_STEPPE
 
 Display lcd = Display(PIN_LCD_RS, PIN_LCD_E, PIN_LCD_D4, PIN_LCD_D5, PIN_LCD_D6, PIN_LCD_D7);
 
+Encoder encoder = Encoder(PIN_ENCODER_A,PIN_ENCODER_B);
 
-#ifdef USE_AF
-Shutter shutter = Shutter(PIN_SHUTTER, PIN_AF, SHUTTER_INVERT);
-#else
 Shutter shutter = Shutter(PIN_SHUTTER, SHUTTER_INVERT);
-#endif //USE_AF
 
+String mainMenuItems[] = {T_MANUAL_CONTROL, T_HOME, T_PREPARE_SHOOT};
+
+Menu mainMenu = Menu(mainMenuItems, PIN_ENCODER_PRESS, PIN_CANCEL, &encoder, &lcd);
 
 void setup()
 {
@@ -27,5 +37,23 @@ void setup()
 
 void loop()
 {
+    byte program = mainMenu.run();
+    switch (program)
+    {
+    case 0x00:
+      //RUN MANUAL CONTROL
+      break;
+    
+    case 0x01:
+      //HOME
+      break;
 
+    case 0x02:
+      //PREPARE SHOOT
+      break;
+
+    case 0xFF:
+      //EXIT
+      break;
+    }
 }
