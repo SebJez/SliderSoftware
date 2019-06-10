@@ -21,9 +21,6 @@ class Display
     public:
         void writeTopLine(String text);
         void writeBottomLine(String text);
-        void writeBottomLeft(String text);
-        void writeBottomMiddle(String text);
-        void writeBottomRight(String text);
         Display(int pin_E, int pin_RS, int pin_D4, int pin_D5, int pin_D6, int pin_D7);
         ~Display();
     private:
@@ -70,7 +67,7 @@ LEFT|
 void Display::writeTopLine(String text)
 {
     while(text.length() < 0xF) text += " ";
-    text = text.substring(0x0,0xF);
+    text = text.substring(0x0,0x10);
     currentText[0]=text;
     update();
 }
@@ -78,34 +75,8 @@ void Display::writeTopLine(String text)
 void Display::writeBottomLine(String text)
 {
     while(text.length() < 0xF) text += " ";
-    text = text.substring(0x0,0xF);
+    text = text.substring(0x0,0x10);
     currentText[1]=text;
     update();
 }
-
-void Display::writeBottomLeft(String text)
-{
-
-    while(text.length() < 0x5) text += " ";
-    text = text.substring(0x0,0x5);
-    currentText[1]= text + currentText[1].substring(0x5);
-    update();
-}
-
-void Display::writeBottomMiddle(String text)
-{
-    while(text.length() < 0x6) text += " ";
-    text = text.substring(0x0,0x6);
-    currentText[1]= currentText[1].substring(0x0,0x5) + text + currentText[1].substring(0xB);
-    update();
-}
-
-void Display::writeBottomRight(String text)
-{
-   while(text.length() < 0x5) text += " ";
-    text = text.substring(0x0,0x5);
-    currentText[1]= currentText[1].substring(0x0,0xB)+text;
-    update();
-}
-
 #endif //lcd16x2_h
