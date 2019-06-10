@@ -28,7 +28,7 @@ Encoder encoder = Encoder(PIN_ENCODER_A,PIN_ENCODER_B);
 
 String mainMenuItems[] = {T_MANUAL_CONTROL, T_HOME, T_PREPARE_SHOOT};
 
-Menu mainMenu = Menu(mainMenuItems, PIN_ENCODER_PRESS, PIN_CANCEL, &encoder, &lcd);
+Menu mainMenu = Menu(mainMenuItems,3, PIN_ENCODER_PRESS, PIN_CANCEL, &encoder, &lcd);
 
 void setup()
 {
