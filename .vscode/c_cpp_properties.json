@@ -3,6 +3,7 @@
         {
             "name": "Win32",
             "includePath": [
+                "C:\\Users\\Zbook\\Documents\\Arduino\\libraries\\Encoder",
                 "C:\\Program Files (x86)\\Arduino\\libraries\\Stepper\\src",
                 "C:\\Program Files (x86)\\Arduino\\libraries\\LiquidCrystal\\src",
                 "C:\\\\Program Files (x86)\\\\Arduino\\\\tools\\\\**",
