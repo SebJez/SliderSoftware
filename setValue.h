@@ -53,6 +53,7 @@ SetValue::~SetValue()
 
 byte SetValue::run()
 {
+    value = defaultValue;
     bool displayChanged = true;
     encoder->write(0);
     while (true)
