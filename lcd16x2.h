@@ -23,6 +23,7 @@ class Display
         void writeBottomLine(String text);
         Display(int pin_E, int pin_RS, int pin_D4, int pin_D5, int pin_D6, int pin_D7);
         ~Display();
+        String padRight(String);
     private:
         String currentText[2];
         LiquidCrystal* lcd;
@@ -78,5 +79,11 @@ void Display::writeBottomLine(String text)
     text = text.substring(0x0,0x10);
     currentText[1]=text;
     update();
+}
+
+String Display::padRight(String text)
+{
+    while(text.length()<0x10) text = " "+text;
+    return text;
 }
 #endif //lcd16x2_h
