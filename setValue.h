@@ -25,18 +25,25 @@ private:
     long step; 
     long value;
 public:
-    SetValue(/* args */);
+    SetValue(String textTop, long minValue, long maxValue, long defaultValue,\
+        pin pinOk, pin pinCancel, Display* display, Encoder* encoder, String unit="", byte digitsAfterDecimal = 0,\
+        String minValueText="", String maxValueText="");
     ~SetValue();
     byte run(); //returns exit code 0 - user cancelled
                 //        exit code 1 - value set
     long getValue() {return value};
 };
 
-SetValue::SetValue(/* args */)
+SetValue::SetValue(String textTop, long minValue, long maxValue, long defaultValue,\
+        pin pinOk, pin pinCancel, Display* display, Encoder* encoder, String unit="", byte digitsAfterDecimal = 0,\
+        String minValueText="", String maxValueText=""):textTop(textTop), minValue(minValue), defaultValue(defaultValue),\
+        pinOk(pinOk), pinCancel(pinCancel), display(display), encoder(encoder), unit(unit), digitsAfterDecimal(digitsAfterDecimal),\
+        minValueText(minValueText), maxValueText(maxValueText)
 {
     value = defaultValue;
     pinMode(pinOK, INPUT_PULLUP);
     pinMode(pinCancel, INPUT_PULLUP);
+    encoder->write(0);
 
 }
 
