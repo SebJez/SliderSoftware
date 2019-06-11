@@ -2,7 +2,8 @@
 #include "lcd16x2.h"
 //#include "motor.h"
 #include <Encoder.h>
-#include "menu.h"
+//#include "menu.h"
+#include "setValue.h"
 
 #ifdef LANGUAGE_EN
   #include "language_en.h"
@@ -26,9 +27,13 @@ Encoder encoder = Encoder(PIN_ENCODER_A,PIN_ENCODER_B);
 
 //Shutter shutter = Shutter(PIN_SHUTTER, SHUTTER_INVERT);
 
-String mainMenuItems[] = {T_MANUAL_CONTROL, T_HOME, T_PREPARE_SHOOT};
+//String mainMenuItems[] = {T_MANUAL_CONTROL, T_HOME, T_PREPARE_SHOOT};
 
-Menu mainMenu = Menu(mainMenuItems,3, PIN_ENCODER_PRESS, PIN_CANCEL, &encoder, &lcd);
+//Menu mainMenu = Menu(mainMenuItems,3, PIN_ENCODER_PRESS, PIN_CANCEL, &encoder, &lcd);
+
+SetValue valueSetter = SetValue("Top text", -500L, 500L, 0L,25L, PIN_ENCODER_PRESS, PIN_CANCEL,\
+                                 &lcd, &encoder, "mm",2,"minimum","maximum");
+
 
 void setup()
 {
@@ -37,8 +42,7 @@ void setup()
 
 void loop()
 {
-  Serial.println(mainMenu.run());
-  delay(200);
+
     /*byte program = mainMenu.run();
     switch (program)
     {

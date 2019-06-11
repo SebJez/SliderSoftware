@@ -84,5 +84,6 @@ void Display::writeBottomLine(String text)
 String Display::padRight(String text)
 {
     while(text.length()<0x10) text = " "+text;
+    return text;
 }
 #endif //lcd16x2_h
