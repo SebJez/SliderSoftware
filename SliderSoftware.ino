@@ -43,6 +43,8 @@ void setup()
 void loop()
 {
 
+  valueSetter.run();
+
     /*byte program = mainMenu.run();
     switch (program)
     {

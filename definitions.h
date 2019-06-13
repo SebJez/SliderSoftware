@@ -23,7 +23,7 @@
     #define LCD_BACKLIGHT_DIGITAL
 #endif //LCD_BACKLIGHT
 
-#define STEPS_PER_MM 1600L //steps per rotation * screw pitch
+#define STEPS_PER_MM 25L //steps per rotation / screw pitch
 #define DEFAULT_SPEED 10.f  //in mm/s
 #define MAX_STEPS 320000L
 #define FLIP_DIRECTION false

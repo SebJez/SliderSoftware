@@ -2,6 +2,7 @@
 #define setValue_h
 #include <Encoder.h>
 #include "lcd16x2.h"
+#include "sparkleUtils.h"
 
 typedef uint8_t pin;
 
@@ -34,6 +35,7 @@ public:
     long getValue() {return value;};
     void setValue(long defaultVal){defaultValue = defaultVal;};
     void updateDisplay();
+    //String formatValue(long value);
 };
 
 SetValue::SetValue(String textTop, long minValue, long maxValue, long defaultValue, long step,\
@@ -89,27 +91,13 @@ byte SetValue::run()
 void SetValue::updateDisplay()
 {
     display->writeTopLine(textTop);
-    String bottomText = String(abs(value));
-    
-    while(bottomText.length()<=digitsAfterDecimal) bottomText = "0" + bottomText;
-    if(value < 0) bottomText = "-"+bottomText;
 
     if(value >= maxValue && maxValueText != "") bottomText = maxValueText;
     else if(value <= minValue && minValueText != "") bottomText = minValueText;
-    else
-    {
-        byte length = bottomText.length();
-        if(digitsAfterDecimal > 0)
-        {
-            bottomText = bottomText.substring(0,length-digitsAfterDecimal)+\
-                        "."+bottomText.substring(length-digitsAfterDecimal);
-        }
-        bottomText = bottomText + unit;
-    }
+    else bottomText = sparkle::formatInteger<long>(value,digitsAfterDecimal, postfix=unit);
 
-    bottomText = display->padRight(bottomText);
+    bottomText = sparkle::padString(bottomText,0x10);
     display->writeBottomLine(bottomText);
 }
-
 
 #endif
