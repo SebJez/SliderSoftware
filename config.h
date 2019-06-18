@@ -10,6 +10,11 @@
 #define MAX_SPEED 10.f  //in mm/s
 #define MAX_STEPS 5000L //length of slider in steps
 
+// Remote shutter --------
+#define DEFAULT_AF_WAIT 100uL //in ms
+#define DEFAULT_SHUTTER_WAIT 100uL //in ms
+
+
 // Pinout ----------------
 #define PIN_ENCODER_A 6
 #define PIN_ENCODER_B 5
