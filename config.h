@@ -13,6 +13,7 @@
 // Remote shutter --------
 #define DEFAULT_AF_WAIT 100uL //in ms
 #define DEFAULT_SHUTTER_WAIT 100uL //in ms
+#define SHUTTER_INVERT false //set to true if shutter triggers on LOW
 
 
 // Pinout ----------------
