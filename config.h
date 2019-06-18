@@ -6,7 +6,7 @@
 #include "language_en.h"
 
 // Geometry --------------
-#define STEPS_PER_MM 25L
+#define STEPS_PER_MM 25.f
 #define MAX_SPEED 10.f  //in mm/s
 #define MAX_STEPS 5000L //length of slider in steps
 
