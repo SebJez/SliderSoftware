@@ -27,7 +27,7 @@ class Stepper
 {
     public:
         Stepper(Pin pin_A1,Pin pin_A2,Pin pin_B1,Pin pin_B2, Pin pin_endstop, Pin pin_cancel,\
-                    float steps_per_mm,float speed_mm_per_s,long max_step,bool using_tick = false, CallbackFunction tick = nullptr)
+                    float steps_per_mm,float speed_mm_per_s,long max_step);
         inline long getStep() const;
         inline float getPosition() const;
         inline long moveTo(long position_steps, bool software_endstops=true);
@@ -61,6 +61,8 @@ class StepperNoTick : public Stepper
 {
     inline void tick(){} 
 };
+
+
 
 } //namespace slider
 

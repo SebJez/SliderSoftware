@@ -11,9 +11,8 @@
 namespace slider
 {
 
-StepperNoTick g_stepper(PIN_STEPPER_A1, PIN_STEPPER_A2, PIN_STEPPER_B1, PIN_STEPPER_B2, PIN_ENDSTOP,PIN_CANCEL,STEPS_PER_MM,MAX_SPEED,MAX_STEPS);
 Display g_display(PIN_LCD_E,PIN_LCD_RS,PIN_LCD_D4,PIN_LCD_D5,PIN_LCD_D6,PIN_LCD_D7);
-
+RotaryEncoder g_encoder(PIN_ENCODER_A,PIN_ENCODER_B);
 
 void setup()
 {
