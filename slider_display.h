@@ -16,6 +16,7 @@ class Display
         ~Display();
         String padRight(String text) const;
         String pad(String text,byte split_position) const;
+
     private:
         String currentText[2];
         LiquidCrystal* lcd;
@@ -23,6 +24,16 @@ class Display
     
     
 };
+
+template<class integer_t> 
+    String formatInteger(integer_t value,byte decimal_places = 0, bool use_plus_sign = false, \
+                                    String prefix = "", String postfix = "");
+
+template<class float_t>
+    String formatFloatingPoint(float_t value, byte decimal_places, bool use_plus_sign = false, \
+                                    String prefix = "", String postfix = "");
+
+
 
 }//namespace slider
 #endif //slider_display_h
