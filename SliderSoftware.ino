@@ -1,7 +1,7 @@
 #include "definitions.h"
 #include "lcd16x2.h"
 //#include "motor.h"
-#include <Encoder.h>
+#include <RotaryEncoder.h>
 //#include "menu.h"
 #include "setValue.h"
 
@@ -23,7 +23,21 @@
 
 Display lcd = Display(PIN_LCD_RS, PIN_LCD_E, PIN_LCD_D4, PIN_LCD_D5, PIN_LCD_D6, PIN_LCD_D7);
 
-Encoder encoder = Encoder(PIN_ENCODER_A,PIN_ENCODER_B);
+RotaryEncoder encoder(PIN_ENCODER_A,PIN_ENCODER_B);
+
+
+//Configuration of interrupts for the rotary encoder
+
+PCICR |= 0b00000100;  //0b001 - port B, 0b010 - port C, 0b100 - port D
+PCMSK2 |= 0b01100000; //pins 5 and 6
+ISR(PCINT2_vect)
+{
+  encoder.tick();
+}
+// see https://thewanderingengineer.com/2014/08/11/arduino-pin-change-interrupts/
+
+
+
 
 //Shutter shutter = Shutter(PIN_SHUTTER, SHUTTER_INVERT);
 

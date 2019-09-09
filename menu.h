@@ -1,6 +1,6 @@
 #ifndef menu_h
 #define menu_h
-#include <Encoder.h>
+#include <RotaryEncoder.h>
 #include "lcd16x2.h"
 
 class Menu
@@ -11,16 +11,16 @@ private:
     byte currentIndex = 0;
     uint8_t pinOK;
     uint8_t pinCancel;
-    Encoder* encoder;
+    RotaryEncoder* encoder;
     Display* display;
 public:
-    Menu(String* items, byte numberOfItems, uint8_t pinOK, uint8_t pinCancel, Encoder* encoder, Display* display);
+    Menu(String* items, byte numberOfItems, uint8_t pinOK, uint8_t pinCancel, RotaryEncoder* encoder, Display* display);
 
     byte run();
     
 };
 
-Menu::Menu(String* items, byte numberOfItems, uint8_t pinOK, uint8_t pinCancel, Encoder* encoder, Display* display ):\
+Menu::Menu(String* items, byte numberOfItems, uint8_t pinOK, uint8_t pinCancel, RotaryEncoder* encoder, Display* display ):\
      items(items), numberOfItems(numberOfItems), pinOK(pinOK), pinCancel(pinCancel), encoder(encoder), display(display)
 {
     pinMode(pinCancel, INPUT_PULLUP);
@@ -42,15 +42,15 @@ byte Menu::run()
           screenChanged = false;
         }
         
-        int encoder_position = encoder->read();
+        int encoder_position = encoder->getPosition();
         int jump = 0;
 
         
-        if(encoder_position > 3 || encoder_position < -3)
+        if(encoder_position != 0)
         {
-          jump = encoder_position/4;
+          jump = encoder_position;
           delay(100);
-          encoder->write(0);
+          encoder->setPosition(0);
         }
 
         

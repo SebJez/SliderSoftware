@@ -1,6 +1,6 @@
 #ifndef setValue_h
 #define setValue_h
-#include <Encoder.h>
+#include <RotaryEncoder.h>
 #include "lcd16x2.h"
 
 typedef uint8_t pin;
@@ -13,7 +13,7 @@ private:
     pin pinOk;
     pin pinCancel;
     Display* display;
-    Encoder* encoder;
+    RotaryEncoder* encoder;
     byte digitsAfterDecimal;
 
     long minValue;
@@ -26,7 +26,7 @@ private:
     long value;
 public:
     SetValue(String textTop, long minValue, long maxValue, long defaultValue, long step,\
-        pin pinOk, pin pinCancel, Display* display, Encoder* encoder, String unit="", byte digitsAfterDecimal = 0,\
+        pin pinOk, pin pinCancel, Display* display, RotaryEncoder* encoder, String unit="", byte digitsAfterDecimal = 0,\
         String minValueText="", String maxValueText="");
     ~SetValue();
     byte run(); //returns exit code 0 - user cancelled
@@ -37,7 +37,7 @@ public:
 };
 
 SetValue::SetValue(String textTop, long minValue, long maxValue, long defaultValue, long step,\
-        pin pinOk, pin pinCancel, Display* display, Encoder* encoder, String unit="", byte digitsAfterDecimal = 0,\
+        pin pinOk, pin pinCancel, Display* display, RotaryEncoder* encoder, String unit="", byte digitsAfterDecimal = 0,\
         String minValueText="", String maxValueText=""):textTop(textTop), minValue(minValue),maxValue(maxValue), defaultValue(defaultValue),step(step),\
         pinOk(pinOk), pinCancel(pinCancel), display(display), encoder(encoder), unit(unit), digitsAfterDecimal(digitsAfterDecimal),\
         minValueText(minValueText), maxValueText(maxValueText)
@@ -45,7 +45,7 @@ SetValue::SetValue(String textTop, long minValue, long maxValue, long defaultVal
     value = defaultValue;
     pinMode(pinOk, INPUT_PULLUP);
     pinMode(pinCancel, INPUT_PULLUP);
-    encoder->write(0);
+    encoder->setPosition(0);
 
 }
 
@@ -57,20 +57,20 @@ byte SetValue::run()
 {
     value = defaultValue;
     bool displayChanged = true;
-    encoder->write(0);
+    encoder->setPosition(0);
  
     while (true)
     {
         if(displayChanged) updateDisplay();
         displayChanged = false;
         long newValue = value;
-        int encoderpos = encoder->read();
+        int encoderpos = encoder->getPosition();
 
-        if(encoderpos > 3 || encoderpos < -3)
+        if(encoderpos != 0)
         {
-            newValue = (encoderpos/4)*step+value;
+            newValue = encoderpos*step+value;
             delay(100);
-            encoder->write(0);
+            encoder->setPosition(0);
         }
         if (value != newValue)
         {
