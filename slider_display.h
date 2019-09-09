@@ -5,7 +5,7 @@
 namespace slider
 {
 
-typedef const uint8_t Pin;
+typedef const unsigned char Pin;
 
 class Display
 {
@@ -15,7 +15,7 @@ class Display
         Display(Pin pin_E, Pin pin_RS, Pin pin_D4, Pin pin_D5, Pin pin_D6, Pin pin_D7);
         ~Display();
         String padRight(String text) const;
-        String pad(String text,byte split_position) const;
+        String pad(String text,unsigned char split_position) const;
 
     private:
         String currentText[2];
@@ -25,12 +25,9 @@ class Display
     
 };
 
-template<class integer_t> 
-    String formatInteger(integer_t value,byte decimal_places = 0, bool use_plus_sign = false, \
+String formatInteger(long value,unsigned char decimal_places = 0, bool use_plus_sign = false, \
                                     String prefix = "", String postfix = "");
-
-template<class float_t>
-    String formatFloatingPoint(float_t value, byte decimal_places, bool use_plus_sign = false, \
+String formatFloatingPoint(float value, unsigned char decimal_places, bool use_plus_sign = false, \
                                     String prefix = "", String postfix = "");
 
 

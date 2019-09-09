@@ -1,5 +1,5 @@
 #ifndef config_h
-#define config_h
+#define config_h  
 
 // UI Language -----------
 //#include "language_pl.h"
@@ -32,7 +32,8 @@
 
 #define PIN_SHUTTER A1
 #define PIN_AF  A0
-    
+
+#define PIN_STEPPER_ENABLE 13 //TODO - implement
 #define PIN_STEPPER_A1 A3
 #define PIN_STEPPER_A2 A2
 #define PIN_STEPPER_B1 A5

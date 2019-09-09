@@ -45,53 +45,16 @@ float Stepper::getSpeed()
     return 1000.f/steps_per_mm_/interval_ms_;
 }
 
-void Stepper::setState(byte state)
+void Stepper::setState(unsigned char state)
 {
     digitalWrite(pin_A1_, (state & 0b01));
     digitalWrite(pin_A2_, ~(state & 0b01));
     digitalWrite(pin_B1_, (state & 0b10));
     digitalWrite(pin_B2_, ~(state & 0b10));
 }
-
-long Stepper::moveBy(long steps, bool software_endstops = true)
+void Stepper::stepBack()
 {
-    if(software_endstops)
-    {
-        if(current_step_+steps > max_step_) steps = max_step_ - current_step_;
-        if(current_step_ + steps < 0) steps = -current_step_;
-    }
-    
-    flag_ = OK_FLAG;
-
-    attachInterrupt(pin_endstop_,onEndstop);
-    attachInterrupt(pin_cancel_,onCancel);
-
-
-    while (steps < 0 && flag_ == OK_FLAG)
-    {
-        switch (current_phase_ &= 0b11)
-        {
-        case 0b00:
-            setState(0b01);
-            break;
-        case 0b01:
-            setState(0b11);
-            break;
-        case 0b10:
-            setState(0b00);
-            break;
-        case 0b11:
-            setState(0b10);
-            break;
-        }
-        ++current_phase_;
-        ++current_step_;
-        ++steps;
-        tick();
-    }
-    while (steps>0 && flag_ == OK_FLAG)
-    {
-        switch(current_phase_ &= 0b11)
+    switch(current_phase_ &= 0b11)
         {
         case 0b00:
             setState(0b10);
@@ -108,8 +71,50 @@ long Stepper::moveBy(long steps, bool software_endstops = true)
         }
         --current_phase_;
         --current_step_;
-        --steps;
-        tick();        
+}
+void Stepper::stepForward()
+{
+    switch (current_phase_ &= 0b11)
+        {
+        case 0b00:
+            setState(0b01);
+            break;
+        case 0b01:
+            setState(0b11);
+            break;
+        case 0b10:
+            setState(0b00);
+            break;
+        case 0b11:
+            setState(0b10);
+            break;
+        }
+        ++current_phase_;
+        ++current_step_;
+}
+long Stepper::moveBy(long steps, bool software_endstops = true)
+{
+    if(software_endstops)
+    {
+        if(current_step_+steps > max_step_) steps = max_step_ - current_step_;
+        if(current_step_ + steps < 0) steps = -current_step_;
+    }
+    
+    flag_ = OK_FLAG;
+
+    attachInterrupt(pin_endstop_,onEndstop);
+    attachInterrupt(pin_cancel_,onCancel);
+
+
+    while (steps < 0 && flag_ == OK_FLAG)
+    {
+        stepForward();
+        ++steps;
+    }
+    while (steps>0 && flag_ == OK_FLAG)
+    {
+        stepBack();
+        --steps;      
     }
     detachInterrupt(pin_cancel_);
     detachInterrupt(pin_endstop_);
@@ -149,6 +154,18 @@ long Stepper::homeOnMax()
     return current_step_;
 }
 
+inline StepperFlag Stepper::getFlag()
+{
+    return flag_;
+}
 
+inline float Stepper::stepsToMm(long steps) const
+{
+    return (float)steps/steps_per_mm_;
+}
+inline long Stepper::mmToSteps(float milimetres) const;
+{
+    return milimetres*steps_per_mm_;
+}
 }//namespace slider
 #endif

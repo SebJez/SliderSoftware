@@ -1,6 +1,6 @@
 #ifndef slider_shutter_cpp
 #define slider_shutter_cpp
-#include "slidder_shutter.h"
+#include "slider_shutter.h"
 
 
 namespace slider

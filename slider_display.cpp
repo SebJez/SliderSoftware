@@ -50,13 +50,13 @@ String Display::padRight(String text)
     return text;
 }
 
-String Display::pad(String text, byte split_position)
+String Display::pad(String text, unsigned char split_position)
 {
     while(text.length()<0x10) text = text.substring(0,split_position)+" "+text.substring(split_position);
     return text;
 }
 
-String formatInteger(integer_t value,byte decimal_places = 0, bool use_plus_sign = false,\
+String formatInteger(long value,unsigned char decimal_places = 0, bool use_plus_sign = false,\
                                      String prefix = "", String postfix = "")
 {
     String number = String(abs(value));
@@ -70,14 +70,14 @@ String formatInteger(integer_t value,byte decimal_places = 0, bool use_plus_sign
 
     String separator = (decimal_places > 0) ? "." : "";
 
-    byte len = number.length();
+    unsigned char len = number.length();
 
     return prefix + sign + number.substring(0,len-decimal_places) + \
             separator + number.substring(len-decimal_places,len) + postfix;
     
 }
 
-String formatFloatingPoint(float_t value, byte decimal_places, bool use_plus_sign = false, \
+String formatFloatingPoint(float value, unsigned char decimal_places, bool use_plus_sign = false, \
                                     String prefix = "", String postfix = "")
 {
     String number = String(value,decimal_places);
