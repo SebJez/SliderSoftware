@@ -2,7 +2,7 @@
 #include "lcd16x2.h"
 //#include "motor.h"
 #include <RotaryEncoder.h>
-//#include "menu.h"
+#include "menu.h"
 #include "setValue.h"
 
 #ifdef LANGUAGE_EN
@@ -28,8 +28,7 @@ RotaryEncoder encoder(PIN_ENCODER_A,PIN_ENCODER_B);
 
 //Configuration of interrupts for the rotary encoder
 
-PCICR |= 0b00000100;  //0b001 - port B, 0b010 - port C, 0b100 - port D
-PCMSK2 |= 0b01100000; //pins 5 and 6
+
 ISR(PCINT2_vect)
 {
   encoder.tick();
@@ -41,9 +40,9 @@ ISR(PCINT2_vect)
 
 //Shutter shutter = Shutter(PIN_SHUTTER, SHUTTER_INVERT);
 
-//String mainMenuItems[] = {T_MANUAL_CONTROL, T_HOME, T_PREPARE_SHOOT};
+String mainMenuItems[] = {"1", "2", "3"};
 
-//Menu mainMenu = Menu(mainMenuItems,3, PIN_ENCODER_PRESS, PIN_CANCEL, &encoder, &lcd);
+Menu mainMenu = Menu(mainMenuItems,3, PIN_ENCODER_PRESS, PIN_CANCEL, &encoder, &lcd);
 
 SetValue valueSetter = SetValue("Top text", -500L, 500L, 0L,25L, PIN_ENCODER_PRESS, PIN_CANCEL,\
                                  &lcd, &encoder, "mm",2,"minimum","maximum");
@@ -51,13 +50,17 @@ SetValue valueSetter = SetValue("Top text", -500L, 500L, 0L,25L, PIN_ENCODER_PRE
 
 void setup()
 {
+  PCICR |= 0b00000100;  //0b001 - port B, 0b010 - port C, 0b100 - port D
+PCMSK2 |= 0b01100000; //pins 5 and 6
   Serial.begin(9600);
 }
 
 void loop()
 {
 
-    /*byte program = mainMenu.run();
+    byte program = mainMenu.run();
+    Serial.print(program);
+    /*
     switch (program)
     {
     case 0x00:

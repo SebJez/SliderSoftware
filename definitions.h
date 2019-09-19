@@ -39,8 +39,8 @@
 //---------------------------------------------------------------
 //--PINS
 //---------------------------------------------------------------
-#define PIN_ENCODER_A 6 //if you change these pins, you need to change
-#define PIN_ENCODER_B 5 //the interrupt configuration in SliderSoftware.ino 
+#define PIN_ENCODER_A 5 //if you change these pins, you need to change
+#define PIN_ENCODER_B 6 //the interrupt configuration in SliderSoftware.ino 
 
 
 #define PIN_ENCODER_PRESS 4
