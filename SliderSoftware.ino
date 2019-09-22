@@ -38,9 +38,9 @@ SerialCommand serial(&stepper);
 
 //Shutter shutter = Shutter(PIN_SHUTTER, SHUTTER_INVERT);
 
-String mainMenuItems[] = {"1", "2", "3"};
+//String mainMenuItems[] = {"1", "2", "3"};
 
-Menu mainMenu = Menu(mainMenuItems,3, PIN_ENCODER_PRESS, PIN_CANCEL, &encoder, &lcd);
+//Menu mainMenu = Menu(mainMenuItems,3, PIN_ENCODER_PRESS, PIN_CANCEL, &encoder, &lcd);
 
 //SetValue valueSetter = SetValue("Top text", -500L, 500L, 0L,25L, PIN_ENCODER_PRESS, PIN_CANCEL,\
                                  &lcd, &encoder, "mm",2,"minimum","maximum");
@@ -48,6 +48,7 @@ Menu mainMenu = Menu(mainMenuItems,3, PIN_ENCODER_PRESS, PIN_CANCEL, &encoder, &
 
 void setup()
 {
+  digitalWrite(13,HIGH);
 //PCICR |= 0b00000100;  //0b001 - port B, 0b010 - port C, 0b100 - port D
 //PCMSK2 |= 0b01100000; //pins 5 and 6
 //ISR(PCINT2_vect)
@@ -60,9 +61,8 @@ void setup()
 void loop()
 {
 
-    byte program = mainMenu.run();
-    Serial.print(program);
-    /*
+    //byte program = mainMenu.run();
+    //Serial.print(program);
   serial.run();
     /*byte program = mainMenu.run();
     switch (program)

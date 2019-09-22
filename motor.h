@@ -59,6 +59,7 @@ Motor::Motor(int pinA1, int pinA2, int pinB1, int pinB2, int pinEndstop, int pin
     pinMode(pinB2, OUTPUT);
     pinMode(pinEndstop, INPUT_PULLUP);
     pinMode(pinCancel, INPUT_PULLUP);
+    
     setSpeed(speed_mm_per_second);
 }
 

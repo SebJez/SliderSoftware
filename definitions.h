@@ -23,8 +23,8 @@
     #define LCD_BACKLIGHT_DIGITAL
 #endif //LCD_BACKLIGHT
 
-#define STEPS_PER_MM 1600L //steps per rotation * screw pitch
-#define DEFAULT_SPEED 10.f  //in mm/s
+#define STEPS_PER_MM 50L //steps per rotation / screw pitch
+#define DEFAULT_SPEED 2.f  //in mm/s
 #define MAX_STEPS 320000L
 #define FLIP_DIRECTION false
 #define SOFTWARE_ENDSTOPS
@@ -65,9 +65,9 @@
     #define PIN_AF  A0
 #endif //REMOTE_SHUTTER
 
-#define PIN_STEPPER_A1 A3
-#define PIN_STEPPER_A2 A2
-#define PIN_STEPPER_B1 A5
-#define PIN_STEPPER_B2 A4
+#define PIN_STEPPER_A1 A5
+#define PIN_STEPPER_A2 A4
+#define PIN_STEPPER_B1 A3
+#define PIN_STEPPER_B2 A2
 
 #endif
