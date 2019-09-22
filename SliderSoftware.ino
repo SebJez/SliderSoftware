@@ -26,6 +26,7 @@ Display lcd = Display(PIN_LCD_RS, PIN_LCD_E, PIN_LCD_D4, PIN_LCD_D5, PIN_LCD_D6,
 
 RotaryEncoder encoder(PIN_ENCODER_A,PIN_ENCODER_B);
 
+SerialCommand serial(&stepper);
 
 //Configuration of interrupts for the rotary encoder
 
@@ -59,7 +60,7 @@ void setup()
 void loop()
 {
 
-  SerialCommand::run(&stepper);
+  serial.run();
     /*byte program = mainMenu.run();
     switch (program)
     {
