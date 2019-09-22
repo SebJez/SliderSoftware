@@ -22,20 +22,18 @@ void interruptCancel()
 
 class Motor
 {
+public:
     long move(long steps, bool enable_endstops = true);
-    float move(float distance_mm,bool enable_endstops = true);
     void setSpeed(float speed_mm_per_second);
-    long getStep();
-    float getPosition();
+    inline float getSpeed();
+    inline long getStep();
     Motor(int pinA1, int pinA2, int pinB1, int pinB2, int pinEndstop, int pinCancel, long steps_per_mm,\
      float speed_mm_per_second, bool flip_direction = false, long max_steps = LONG_MAX);
-    long autoHome();
-    long fullHome();
-
-    private:
-        void makeStep(bool clockwise);
+    long home();
+    
+private:
         long stepNumber = 0;
-        byte phase = 0; //overflow intended 
+        byte phase = 0;
         unsigned long interval;
         unsigned long last_step_time = 0;
         long steps_per_mm;
@@ -67,6 +65,11 @@ Motor::Motor(int pinA1, int pinA2, int pinB1, int pinB2, int pinEndstop, int pin
 void Motor::setSpeed(float speed_mm_per_second)
 {
     interval = 1e6 / steps_per_mm / speed_mm_per_second;
+}
+
+inline float Motor::getSpeed()
+{
+    return 1e6/steps_per_mm/interval;
 }
 
 long Motor::move(long steps, bool enable_endstops = true)
@@ -172,25 +175,12 @@ long Motor::move(long steps, bool enable_endstops = true)
     return stepNumber;
 }
 
-float Motor::move(float distance_mm, bool enable_endstops)
-{
-    long steps = distance_mm * steps_per_mm;
-    return ((float)move(steps),enable_endstops)/((float)steps_per_mm);
-}
-
-long Motor::getStep()
+inline long Motor::getStep()
 {
     return stepNumber;
 }
 
-float Motor::getPosition()
-{
-    return (float)stepNumber/steps_per_mm;
-}
-
-
-
-long Motor::autoHome()
+long Motor::home()
 {
     move(-LONG_MIN,false);
     if(endstopFlag)
@@ -201,15 +191,4 @@ long Motor::autoHome()
     return stepNumber;
 }
 
-long Motor::fullHome()
-{
-    autoHome();
-    move(LONG_MAX,false);
-    if (endstopFlag)
-    {
-        max_steps = stepNumber;
-        endstopFlag = false;
-    }
-    return stepNumber;
-}
 #endif //motor_h
