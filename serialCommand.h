@@ -28,6 +28,7 @@ class SerialCommand
             case 'H':
                 {
                     stepper->home();
+                    Serial.println("H");
                     break;
                 }
             case 'X':
@@ -40,7 +41,8 @@ class SerialCommand
             case 'S':
                 {
                     float speed = command->toFloat();
-                    stepper->setSpeed(speed);
+                    Serial.print("S");
+                    Serial.println(String(stepper->setSpeed(speed)));
                     break;
                 }
             case 'I':
