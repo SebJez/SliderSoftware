@@ -24,7 +24,7 @@ class Motor
 {
 public:
     long move(long steps, bool enable_endstops = true);
-    void setSpeed(float speed_mm_per_second);
+    float setSpeed(float speed_mm_per_second);
     inline float getSpeed();
     inline long getStep();
     Motor(int pinA1, int pinA2, int pinB1, int pinB2, int pinEndstop, int pinCancel, long steps_per_mm,\
@@ -63,9 +63,12 @@ Motor::Motor(int pinA1, int pinA2, int pinB1, int pinB2, int pinEndstop, int pin
     setSpeed(speed_mm_per_second);
 }
 
-void Motor::setSpeed(float speed_mm_per_second)
+float Motor::setSpeed(float speed_mm_per_second)
 {
+    if(speed_mm_per_second > MAX_SPEED) speed_mm_per_second = MAX_SPEED;
+    else if(speed_mm_per_second < MIN_SPEED) speed_mm_per_second = MIN_SPEED;
     interval = 1e6 / steps_per_mm / speed_mm_per_second;
+    return speed_mm_per_second;
 }
 
 inline float Motor::getSpeed()

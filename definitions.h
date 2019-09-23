@@ -25,7 +25,9 @@
 
 #define STEPS_PER_MM 50L //steps per rotation / screw pitch
 #define DEFAULT_SPEED 2.f  //in mm/s
-#define MAX_STEPS 320000L
+#define MAX_SPEED 2.f
+#define MIN_SPEED 0.02f
+#define MAX_STEPS 15000L
 #define FLIP_DIRECTION false
 #define SOFTWARE_ENDSTOPS
 
