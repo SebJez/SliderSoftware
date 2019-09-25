@@ -28,7 +28,6 @@
 #define MAX_SPEED 2.f
 #define MIN_SPEED 0.02f
 #define MAX_STEPS 15000L
-#define FLIP_DIRECTION false
 #define SOFTWARE_ENDSTOPS
 
 #ifdef SOFTWARE_ENDSTOPS
