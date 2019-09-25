@@ -28,7 +28,7 @@ public:
     inline float getSpeed();
     inline long getStep();
     Motor(int pinA1, int pinA2, int pinB1, int pinB2, int pinEndstop, int pinCancel, long steps_per_mm,\
-     float speed_mm_per_second, bool flip_direction = false, long max_steps = LONG_MAX);
+     float speed_mm_per_second, long max_steps = LONG_MAX);
     long home();
     
 private:
@@ -92,7 +92,6 @@ long Motor::move(long steps, bool enable_endstops = true)
     long remaining_steps = abs(steps_to_do);
     
     bool dir = (steps_to_do >= 0) ? 1 : 0;
-    if(flip_direction) dir = !dir;
 
     while(remaining_steps>0 && motorStopFlag == false)
     {
