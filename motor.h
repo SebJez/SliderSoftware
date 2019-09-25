@@ -30,6 +30,8 @@ public:
     Motor(int pinA1, int pinA2, int pinB1, int pinB2, int pinEndstop, int pinCancel, long steps_per_mm,\
      float speed_mm_per_second, long max_steps = LONG_MAX);
     long home();
+    inline float stepsToMm(long steps);
+    inline long mmToSteps(float mm);
     
 private:
         long stepNumber = 0;
@@ -194,4 +196,12 @@ long Motor::home()
     return stepNumber;
 }
 
+inline float Motor::stepsToMm(long steps)
+{
+    return float(steps)/steps_per_mm;
+}
+inline long Motor::mmToSteps(float mm)
+{
+    return long(mm*steps_per_mm)
+}
 #endif //motor_h
