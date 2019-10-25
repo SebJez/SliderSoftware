@@ -16,7 +16,7 @@ class SerialCommand
                     Serial.print("S");
                     Serial.println(String(stepper->getSpeed()));
                     Serial.print("X");
-                    Serial.println(String(stepper->getStep()));
+                    Serial.println(String(stepper->stepsToMm(stepper->getStep())));
            };
 
            void interpretCommand(String* command)
@@ -33,9 +33,10 @@ class SerialCommand
                 }
             case 'X':
                 {
-                    long steps = command->toInt();
+                    float millimeters = command->toFloat();
+                    long steps = stepper->mmToSteps(millimeters);
                     Serial.print("X");
-                    Serial.println(String(stepper->move(steps)));
+                    Serial.println(String(stepper->stepsToMm(stepper->move(steps))));
                     break;
                 }
             case 'S':

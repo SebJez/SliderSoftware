@@ -51,9 +51,9 @@ private:
 };
 
 Motor::Motor(int pinA1, int pinA2, int pinB1, int pinB2, int pinEndstop, int pinCancel, long steps_per_mm, \
-  float speed_mm_per_second, bool flip_direction = false, long max_steps = LONG_MAX):\
+  float speed_mm_per_second, long max_steps = LONG_MAX):\
   pinA1(pinA1),pinA2(pinA2),pinB1(pinB1),pinB2(pinB2),pinEndstop(pinEndstop),pinCancel(pinCancel), \
-  steps_per_mm(steps_per_mm),flip_direction(flip_direction),max_steps(max_steps)
+  steps_per_mm(steps_per_mm),max_steps(max_steps)
 {
     pinMode(pinA1, OUTPUT);
     pinMode(pinA2, OUTPUT);
@@ -202,6 +202,6 @@ inline float Motor::stepsToMm(long steps)
 }
 inline long Motor::mmToSteps(float mm)
 {
-    return long(mm*steps_per_mm)
+    return long(mm*steps_per_mm);
 }
 #endif //motor_h
