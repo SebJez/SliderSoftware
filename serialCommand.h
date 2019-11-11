@@ -9,13 +9,13 @@ class SerialCommand
      private:
            void printInfo()
            {
-                    Serial.print("steps per mm\t");
-                    Serial.println(String(STEPS_PER_MM));
-                    Serial.print("max steps\t");
-                    Serial.println(String(MAX_STEPS));
-                    Serial.print("S");
+                    Serial.print("K ");
+                    Serial.println(String(1.f/STEPS_PER_MM));
+                    Serial.print("L ");
+                    Serial.println(String(stepper->stepsToMm(MAX_STEPS)));
+                    Serial.print("S ");
                     Serial.println(String(stepper->getSpeed()));
-                    Serial.print("X");
+                    Serial.print("X ");
                     Serial.println(String(stepper->stepsToMm(stepper->getStep())));
            };
 
@@ -35,14 +35,14 @@ class SerialCommand
                 {
                     float millimeters = command->toFloat();
                     long steps = stepper->mmToSteps(millimeters);
-                    Serial.print("X");
+                    Serial.print("X ");
                     Serial.println(String(stepper->stepsToMm(stepper->move(steps))));
                     break;
                 }
             case 'S':
                 {
                     float speed = command->toFloat();
-                    Serial.print("S");
+                    Serial.print("S ");
                     Serial.println(String(stepper->setSpeed(speed)));
                     break;
                 }
