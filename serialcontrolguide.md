@@ -31,6 +31,7 @@ All commands start with an uppercase letter and and with newline (`\n`).
     X 10.0  //move forward by 10 mm
     X -0.2  //move back by 0.2 mm
     ```
+    
     After finishing the movement the slider replies with the letter `X` follow by its current position eg. `X 20.3`. **Warning**: the position might not be the one requested    if the slider reaches the end of its range or the requested move is not a multiple of the length of one step.
 
 ### S - speed
@@ -38,6 +39,7 @@ All commands start with an uppercase letter and and with newline (`\n`).
     ```
     S 5.0   //set speed to 5 mm/s
     ```
+    
     The slider replies with the letter `S` followed by its current speed setting.
 
 ### I - print configuration
