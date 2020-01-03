@@ -24,6 +24,7 @@ class Motor
 {
 public:
     long move(long steps, bool enable_endstops = true);
+    inline long moveTo(long step, bool enable_endstops = true);
     float setSpeed(float speed_mm_per_second);
     inline float getSpeed();
     inline long getStep();
@@ -203,5 +204,10 @@ inline float Motor::stepsToMm(long steps)
 inline long Motor::mmToSteps(float mm)
 {
     return long(mm*steps_per_mm);
+}
+
+inline long Motor::moveTo(long step, bool enable_endstops  = true)
+{
+    return move(step - getStep(), enable_endstops);
 }
 #endif //motor_h
