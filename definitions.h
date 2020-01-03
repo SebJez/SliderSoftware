@@ -81,4 +81,12 @@
 #define PIN_STEPPER_B1 A3
 #define PIN_STEPPER_B2 A2
 
+//---------------------------------------------------------------
+//-DEFAULT-TIMING
+//---------------------------------------------------------------
+#define DEFAULT_AF_TIME 500L
+#define DEFAULT_SHUTTER_TIME 100L
+#define DEFAULT_DWELL_BEFORE 100L
+#define DEFAULT_DWELL_AFTER 500L
+
 #endif

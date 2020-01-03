@@ -6,6 +6,7 @@
 #define T_MANUAL_CONTROL    "Manual control"
 #define T_HOME              "Home slider"
 #define T_PREPARE_SHOOT     "Prepare a shoot"
+#define T_SERIES            "Series"
 //                           0123456789ABCDEf
 
 #endif
