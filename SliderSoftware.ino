@@ -1,7 +1,7 @@
 #include "definitions.h"
-#include "lcd16x2.h"
-#include "motor.h"
-#include <RotaryEncoder.h>
+#include "textLcd.h"
+//#include "motor.h"
+//#include <RotaryEncoder.h>
 //#include "menu.h"
 //#include "setValue.h"
 #include "serialCommand.h"
@@ -19,14 +19,14 @@
 #endif //REMOTE_SHUTTER
 
 
-Motor stepper = Motor(PIN_STEPPER_A1, PIN_STEPPER_A2, PIN_STEPPER_B1, PIN_STEPPER_B2,\
+//Motor stepper = Motor(PIN_STEPPER_A1, PIN_STEPPER_A2, PIN_STEPPER_B1, PIN_STEPPER_B2,\
   PIN_ENDSTOP, PIN_CANCEL, STEPS_PER_MM, DEFAULT_SPEED, MAX_STEPS);
 
-Display lcd = Display(PIN_LCD_RS, PIN_LCD_E, PIN_LCD_D4, PIN_LCD_D5, PIN_LCD_D6, PIN_LCD_D7);
+TextLCD lcd = TextLCD(16,2,PIN_LCD_RS, PIN_LCD_E, PIN_LCD_D4, PIN_LCD_D5, PIN_LCD_D6, PIN_LCD_D7);
 
-RotaryEncoder encoder(PIN_ENCODER_A,PIN_ENCODER_B);
+//RotaryEncoder encoder(PIN_ENCODER_A,PIN_ENCODER_B);
 
-SerialCommand serial(&stepper);
+//SerialCommand serial(&stepper);
 
 //Configuration of interrupts for the rotary encoder
 
@@ -63,7 +63,7 @@ void loop()
 
     //byte program = mainMenu.run();
     //Serial.print(program);
-  serial.run();
+  //serial.run();
     /*byte program = mainMenu.run();
     switch (program)
     {
